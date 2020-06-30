@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions>
+
+    <!-- Default Admin Main Template -->
+    <definition name="base" template="/WEB-INF/views/layout/base-layout.jsp">
+    
+        <put-attribute name="top-nav" value="/WEB-INF/views/layout/top-nav.jsp" />
+        <put-attribute name="sidebar" value="/WEB-INF/views/layout/sidebar.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+        
+    </definition>
+    
+    <definition name="home" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+    </definition>
+    
+	<definition name="category-action" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/category/category-action.jsp" />
+    </definition>
+    
+    <definition name="category-list" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/category/category-list.jsp" />
+    </definition>
+    
+     
+	<definition name="user-action" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/user/user-action.jsp" />
+    </definition>
+    
+    <definition name="user-list" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/user/user-list.jsp" />
+    </definition>
+    
+    <definition name="product-action" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/product/product-action.jsp" />
+    </definition>
+    
+    <definition name="product-list" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/product/product-list.jsp" />
+    </definition>
+    
+    <definition name="history-list" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/recommend/history-list.jsp" />
+    </definition>
+    
+    <definition name="menu-list" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/menu/menu-list.jsp" />
+    </definition>
+    <definition name="menu-permission" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/menu/menu-permission.jsp" />
+    </definition>   
+     <definition name="order-list" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/order/order-list.jsp" />
+    </definition> 
+     <definition name="review-list" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/review/review-list.jsp" />
+    </definition>  
+    
+        <!-- Default Web Template -->
+    <definition name="web" template="/WEB-INF/views/web/web-base.jsp">
+    	<put-attribute name="header" value="/WEB-INF/views/web/header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/web/footer.jsp" />
+    </definition>
+    
+     <definition name="shop" extends="web">
+        <put-attribute name="body" value="/WEB-INF/views/shop.jsp" />
+    </definition>
+    
+    <definition name="single-product" extends="web">
+        <put-attribute name="body" value="/WEB-INF/views/single-product.jsp" />
+    </definition>
+    
+     <definition name="author" extends="web">
+        <put-attribute name="body" value="/WEB-INF/views/author.jsp" />
+    </definition>
+    
+    <definition name="cart" extends="web">
+        <put-attribute name="body" value="/WEB-INF/views/cart.jsp" />
+    </definition>
+    
+    <definition name="success-order" extends="web">
+        <put-attribute name="body" value="/WEB-INF/views/order-success.jsp" />
+    </definition>
+    
+    <definition name="checkout" extends="web">
+        <put-attribute name="body" value="/WEB-INF/views/checkout.jsp" />
+    </definition>
+    
+</tiles-definitions>
+                
