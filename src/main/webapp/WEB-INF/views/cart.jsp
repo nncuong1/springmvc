@@ -81,6 +81,8 @@
         </div>
 <script>
 	$(document).ready(function(){
+		$('.bradcaump-title').html('Giỏ hàng');
+		$('span.breadcrumb_item').html('Giỏ hàng');
 		processMessage();
 		loadPrice();
 		

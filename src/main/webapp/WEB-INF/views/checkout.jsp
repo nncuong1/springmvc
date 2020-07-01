@@ -111,7 +111,10 @@
 </section>
 <script>
 	$options = $('#district_id').find('option');
+	
 	$(document).ready(function(){
+		$('.bradcaump-title').html('Đặt hàng');
+		$('span.breadcrumb_item').html('Đặt hàng');
 		$(".order__btn").click(function(e){
 			$('#provinceId').val($('#province_id').val());
 			$('#districtId').val($('#district_id').val());

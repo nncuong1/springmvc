@@ -16,7 +16,7 @@
     </definition>
     
     <definition name="home" extends="base">
-        <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/home-admin.jsp" />
     </definition>
     
 	<definition name="category-action" extends="base">

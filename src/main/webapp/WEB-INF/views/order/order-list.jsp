@@ -40,6 +40,7 @@
                                 </div>
 							</div>
 						</div>
+						<br>
 						<div class="form-group">
 							<label for="statusType" class="control-label col-md-3 col-sm-3 col-xs-12">To date</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
@@ -53,7 +54,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-								<button type="submit" class="btn btn-success">Search</button>
+								<button type="submit" id="btn-orderForm" class="btn btn-success">Search</button>
 							</div>
 						</div>
 					</form:form>
@@ -110,28 +111,38 @@
 			var pageIndex = $(this).text();
 			var nestedData = $("#orderForm").toJson(); 
 			console.log(nestedData);
-			 $.ajax({
-				 url: "/inventory/admin/paging/order?page="+pageIndex, 
-				 type :"POST",
-				 contentType: 'application/json',
-				 data : JSON.stringify(nestedData),
-				 dataType: 'text',
-				 success: function(value){
-				   var bodyCategory =  $("#table-order").find("tbody");
-				   bodyCategory.empty();
-				   bodyCategory.append(value);
-				 },
-				 error: function (error) {
-		         	console.log(error);
-		        }
-			});
+		
+				 $.ajax({
+					 url: "/inventory/admin/paging/order?page="+pageIndex, 
+					 type :"POST",
+					 contentType: 'application/json',
+					 data : JSON.stringify(nestedData),
+					 dataType: 'text',
+					 success: function(value){
+					   var bodyCategory =  $("#table-order").find("tbody");
+					   bodyCategory.empty();
+					   bodyCategory.append(value);
+					 },
+					 error: function (error) {
+			         	console.log(error);
+			        }
+				});
+			
 		})
 		 $('#fromDatePicker').datetimepicker({
-			 format : 'YYYY-MM-DD HH:mm:ss'
+			 format : 'YYYY-MM-DD'
+			//format : 'YYYY-MM-DD HH:mm:ss'
 		 });
 		 $('#toDatePicker').datetimepicker({
-			 format : 'YYYY-MM-DD HH:mm:ss'
+			 format : 'YYYY-MM-DD'
 		 })
+		 
+		 $("#btn-orderForm").click(function(e){
+			 alert("hello ");
+			if($("#orderForm").valid()){
+			    $("#orderForm").submit();
+			}
+		 });
 	});
 	
 	function loadUI(){

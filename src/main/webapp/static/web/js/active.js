@@ -626,6 +626,29 @@
 		}
 	});
 	
+	$("#orderForm").validate({
+		rules: {
+			fromDate: {
+				date: true,
+				dateLessThan : '#toDate'
+			}, 
+			toDate : {
+				date: true,
+				dateGreaterThan : "#fromDate"
+			}
+		},
+		messages: {
+			fromDate: {
+				date: "Nhap dung dinh dang ngay thang",
+				dateLessThan: "thoi gian bat dau < thoi gian ket thuc"
+			},
+			toDate : {
+				date: "Nhap dung dinh dang ngay thang",
+				dateGreaterThan: "thoi gian bat dau < thoi gian ket thuc",
+			}
+		}
+	});
+	
 	$("#customer_address").validate({
 		ignore: "",
 		rules: {

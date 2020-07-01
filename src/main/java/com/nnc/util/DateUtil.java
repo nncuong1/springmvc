@@ -13,6 +13,11 @@ public class DateUtil {
 		//return sdf.parse(dateString);
 		return dateString;
 	}
+	
+	public static Date formatDate(String date) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		return sdf.parse(date);
+	}
 
 	public static String getDaysAgo(Date date) {
 		double seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);

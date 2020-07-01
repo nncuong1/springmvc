@@ -1,5 +1,7 @@
 package com.nnc.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,9 +10,12 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nnc.dto.OrderForm;
+import com.nnc.entity.Category;
 import com.nnc.entity.Menu;
 import com.nnc.entity.Order;
 import com.nnc.entity.OrderItem;
@@ -37,6 +43,15 @@ public class OrderController {
 	private ProductService productService;
 	
 	@Autowired OrderService orderService;
+	
+	@InitBinder
+	private void initBinder(WebDataBinder binder) {
+		if(binder.getTarget()==null) {
+			return;
+		}
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+	}
 	
 	@RequestMapping("/admin/order/list")
 	public String showOrderList(Model model, HttpSession session,@ModelAttribute("orderForm") OrderForm orderForm) {

@@ -47,12 +47,18 @@ public class OrderServiceImpl implements OrderService {
 				mapParams.put("userId",orderForm.getCustomerId());
 			}
 			if(orderForm.getFromDate()!=null) {
-				queryStr.append(" and model.updateDate >= :fromDate");
-				mapParams.put("fromDate",orderForm.getFromDate());
+				queryStr.append(" and model.createDate >= :fromDate");
+			
+					mapParams.put("fromDate",orderForm.getFromDate());
+					System.out.println("from date : "+orderForm.getFromDate());
+				
 			}
 			if(orderForm.getToDate()!=null) {
-				queryStr.append(" and model.updateDate <= :toDate");
-				mapParams.put("toDate",orderForm.getToDate());
+				queryStr.append(" and model.createDate <= :toDate");
+				
+					mapParams.put("toDate",orderForm.getToDate());
+					System.out.println("to date : "+orderForm.getToDate());
+				
 			}
 		}
 		queryStr.append(" order by model.status asc, model.createDate desc");
