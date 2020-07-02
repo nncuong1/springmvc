@@ -165,7 +165,6 @@
 						<a class="first__img" href="<c:url value="/product?productId=${product.id}"/>"><img src="<c:url value="/files/product/${product.imgUrl}"/>" alt="product image"></a>
 					</div>
 					<div class="product__content content--center">
-
 					</div>
 				</div>
 				<!-- Single product end -->

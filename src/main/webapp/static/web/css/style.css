@@ -629,12 +629,12 @@ a {
 
 /* Background Image */
 .bg-image--1 {
-  background-image: url(/inventory/static/web/images/bg/1.jpg);
+  background-image: url(/inventory/static/web/images/bg/books-1163695_1920.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center; }
 .bg-image--2 {
-  background-image: url(/inventory/static/web/images/bg/2.jpg);
+	background-image: url(/inventory/static/web/images/bg/typewriter-801921_1920.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center; }
@@ -644,8 +644,9 @@ a {
   background-size: cover;
   background-position: center center; }
 .bg-image--4 {
-  background-image: url(/inventory/static/web/images/bg/4.jpg);
+  background-image: url(/inventory/static/web/images/bg/literature-3091212_1920.jpg);
   background-repeat: no-repeat;
+  opacity : 1;
   background-size: cover;
   background-position: center center; }
 .bg-image--5 {
@@ -659,9 +660,10 @@ a {
   background-size: cover;
   background-position: center center; }
 .bg-image--7 {
-  background-image: url(/inventory/static/web/images/bg/7.jpg);
+  background-image: url(/inventory/static/web/images/bg/books-860444_1920.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+    opacity : 1;
   background-position: center center; }
 .bg-image--8 {
   background-image: url(/inventory/static/web/images/bg/8.jpg);
@@ -1004,7 +1006,7 @@ Elements Styles
   .section__title.title--white h2.title__be--2::after {
     content: url("/inventory/static/web/images/icons/icon_title3.png"); }
 .section__title h2 {
-  color: #333;
+  color: #fff;
   display: block;
   font-size: 30px;
   font-weight: 700;
@@ -2889,7 +2891,7 @@ nav.menu {
   margin-top: 20px;
 }
 .newsletter__block p {
-  color: #333;
+  color: #fff;
   font-size: 14px;
   line-height: 25px;
   padding: 0 60px 60px;
@@ -2924,7 +2926,7 @@ nav.menu {
    .newsletter__block .newsletter__box button {
   background: transparent none repeat scroll 0 0;
   border: medium none;
-  color: #333;
+  color: #fff;
   display: inline-block;
   font-size: 14px;
   font-weight: 700;
