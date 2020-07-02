@@ -59,4 +59,26 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao<P
 				createQuery("select distinct p from review r join product p on r.product = p.id",Product.class).getResultList();	
 		return products;
 	}
+	@Override
+	public List<Product> getNewestProducts() {
+		Query<Product> query  =sessionFactory.getCurrentSession().createQuery("select p from product p where p.activeFlag = 1 order by p.createDate DESC",Product.class);
+		query.setMaxResults(5);
+		List<Product> products = query.getResultList();
+		return products;
+	}
+	
+	@Override
+	public List<Object[]> getBestSellerProductId() {
+		String hql = "select oi.product.id, count(oi.product.id) as rak, o.createDate, sum(oi.quantity) as qty from OrderItem oi" + 
+				" join orders o on o.id = oi.order group by oi.product.id order by o.createDate desc, qty desc, rak desc";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setMaxResults(8);
+		List<Object[]> results = query.getResultList();
+		return results;
+	}
+	@Override
+	public List<Product> getBestSellerProduct(List<Integer> ids) {
+		List<Product> products = sessionFactory.getCurrentSession().byMultipleIds(Product.class).multiLoad(ids);
+		return products;
+	}
 }

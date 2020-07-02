@@ -20,4 +20,6 @@ public interface ProductService {
 	public List<Product> getRecommendedProducts(int productId, int categoryId) throws Exception;
 	public List<Product> getRecommendedProducts(Integer userId, int productId, int categoryId) throws Exception;
 	public List<Product> getRelatedProduct(int productId, int categoryId);
+	public List<Product> getNewestProducts();
+	public List<Product> getBestSellerProducts();
 }

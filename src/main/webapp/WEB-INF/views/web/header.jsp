@@ -15,7 +15,10 @@
             <div class="col-lg-8 d-none d-lg-block">
                 <nav class="mainmenu__nav">
                     <ul class="meninmenu d-flex justify-content-start">
-                        <li class="drop with--one--item"><a href="/NongSan/home">Trang chủ</a></li>
+                        <li class="drop with--one--item"><a href="<c:url value="/home"/>">Trang chủ</a></li>
+                    </ul>
+                    <ul class="meninmenu d-flex justify-content-start">
+                        <li class="drop with--one--item"><a href="<c:url value="/shop"/>">Cửa hàng</a></li>
                     </ul>
                 </nav>
             </div>

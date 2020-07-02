@@ -15,7 +15,7 @@
         
     </definition>
     
-    <definition name="home" extends="base">
+    <definition name="home-admin" extends="base">
         <put-attribute name="body" value="/WEB-INF/views/home-admin.jsp" />
     </definition>
     

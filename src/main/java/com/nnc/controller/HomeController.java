@@ -1,12 +1,8 @@
 package com.nnc.controller;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.apache.velocity.runtime.log.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +15,6 @@ import com.nnc.entity.Product;
 import com.nnc.service.CategoryService;
 import com.nnc.service.ProductService;
 import com.nnc.service.ProductServiceImpl;
- 
 import com.nnc.util.Paging;
 
 @Controller
@@ -30,14 +25,12 @@ public class HomeController {
 	
 	@Autowired
 	private CategoryService categoryService;
-//	@Autowired
-//	ProvinceService provinceService;
 	
 	private static final Logger log = Logger.getLogger(ProductServiceImpl.class);
 	
 	
 	@RequestMapping("/shop")
-	public String home(Model model, @RequestParam(required = false) String page, @RequestParam(required = false) String key) {
+	public String shop(Model model, @RequestParam(required = false) String page, @RequestParam(required = false) String key) {
 		Paging paging = new Paging(9);
 		if(page==null || StringUtils.isEmpty(page)) {
 			paging.setIndexPage(1);
@@ -53,6 +46,16 @@ public class HomeController {
 		model.addAttribute("products", products);
 		model.addAttribute("categories",categories);
 		return "shop";
+	}
+	
+	@RequestMapping("/home")
+	public String home(Model model) {
+		List<Product> newestProducts = productService.getNewestProducts();
+		List<Product> bestSellerProducts = productService.getBestSellerProducts();
+		
+		model.addAttribute("newestProducts",newestProducts);
+		model.addAttribute("bestSellerProducts",bestSellerProducts);
+		return "home";
 	}
 	
 	@RequestMapping("/category/{id}")

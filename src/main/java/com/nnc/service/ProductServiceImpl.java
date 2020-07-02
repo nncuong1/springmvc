@@ -219,6 +219,20 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return recommendedProduct;
 	}
-	
+
+	@Override
+	public List<Product> getNewestProducts() {
+		return productDao.getNewestProducts();
+	}
+
+	@Override
+	public List<Product> getBestSellerProducts() {
+		List<Object[]> rows = productDao.getBestSellerProductId();
+		List<Integer> multiIds = new ArrayList<Integer>();
+		for (Object[] row : rows) {
+			multiIds.add((Integer)row[0]);
+		}
+		return productDao.getBestSellerProduct(multiIds);
+	}
 }
 

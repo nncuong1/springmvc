@@ -57,6 +57,8 @@
 
 <script>
 	$(document).ready(function(){
+		$('.bradcaump-title').html('Cửa hàng');
+		$('span.breadcrumb_item').html('Cửa hàng');
 		//var des = "${pageInfor.indexPage}";
 		//console.log(des);
 	});
