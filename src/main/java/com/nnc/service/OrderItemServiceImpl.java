@@ -1,5 +1,7 @@
 package com.nnc.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,11 @@ public class OrderItemServiceImpl implements OrderItemService {
 	@Override
 	public void saveOrderItem(OrderItem orderItem) throws Exception {
 		orderItemDao.save(orderItem);
+	}
+
+	@Override
+	public List<OrderItem> findByOrderId(int id) {
+		return orderItemDao.findByOrderId(id);
 	}
 
 }

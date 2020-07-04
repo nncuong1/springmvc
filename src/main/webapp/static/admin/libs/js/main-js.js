@@ -3,6 +3,7 @@ $SIDEBAR_MENU = $('.nav-left-sidebar');
 var PATH_URL = window.location.path;
 
 $(document).ready(function () {
+	
 	//alert('hello');
 //jQuery(document).ready(function($) {
     'use strict';

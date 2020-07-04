@@ -28,4 +28,9 @@ public class AddressServiceImpl implements AddressService {
 	public Address findById(int id) {
 		return addressDao.findById(Address.class, id);
 	}
+
+	@Override
+	public Address getAddressDetailById(int id) {
+		return addressDao.getAddressDetailById(id);
+	}
 }

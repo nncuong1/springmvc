@@ -6,4 +6,5 @@ import com.nnc.entity.Address;
 
 public interface AddressDao<E> extends BaseDao<E> {
 	public List<Address> findByCustomerId(int id);
+	public Address getAddressDetailById(int id);
 }

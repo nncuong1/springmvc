@@ -77,7 +77,8 @@
 								<td><a href="javascript:void(0);" style="text-decoration:none" >${order.status}</a></td>
 								<td>${order.orderDate}</td>
 								<td>
-									<a href="<c:url value="/admin/order/view/${order.id}"/>">Chi tiết đơn hàng</a>
+									<a href="<c:url value="/admin/order/detail/${order.id}"/>">Chi tiết đơn hàng</a>
+									<!--  <a href="<c:url value="/admin/order/detail?orderId=${order.id}&addrId=${order.address.id}"/>">Chi tiết đơn hàng</a>-->
 								</td>
 							</tr>
 						</c:forEach>
@@ -105,7 +106,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		loadUI();
-		
+		processMessage();
 		$("body").on("click",".page-item",function(){
 			$(this).addClass("active").siblings().removeClass('active');
 			var pageIndex = $(this).text();
@@ -131,7 +132,6 @@
 		})
 		 $('#fromDatePicker').datetimepicker({
 			 format : 'YYYY-MM-DD'
-			//format : 'YYYY-MM-DD HH:mm:ss'
 		 });
 		 $('#toDatePicker').datetimepicker({
 			 format : 'YYYY-MM-DD'
@@ -165,5 +165,21 @@
 		});
 		$("#table-menu td.permission-0 i").addClass("fa fa-times").css("color", "red");
 		$("#table-menu td.permission-1 i").addClass("fa fa-check").css("color", "green");;
+	}
+	function processMessage(){
+		var msgSuccess = '${msgSuccess}';
+		var msgError = '${msgError}';
+		if(msgSuccess){
+			PNotify.success({
+				text : msgSuccess,
+				delay : 1500
+			});
+		}
+		if(msgError){
+			PNotify.error({
+				text : msgError,
+				delay : 1500
+			});
+		}
 	}
 </script>

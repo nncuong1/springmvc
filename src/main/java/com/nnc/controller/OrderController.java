@@ -5,10 +5,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -17,18 +17,20 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nnc.dto.OrderForm;
+import com.nnc.entity.Address;
 import com.nnc.entity.Category;
-import com.nnc.entity.Menu;
 import com.nnc.entity.Order;
 import com.nnc.entity.OrderItem;
 import com.nnc.entity.Product;
-import com.nnc.entity.Role;
+import com.nnc.service.AddressService;
+import com.nnc.service.OrderItemService;
 import com.nnc.service.OrderService;
 import com.nnc.service.ProductService;
 import com.nnc.util.Constant;
@@ -36,13 +38,21 @@ import com.nnc.util.MapStatus;
 import com.nnc.util.Paging;
 
 @Controller
-//@SessionAttributes("cart")
 public class OrderController {
 	
 	@Autowired
 	private ProductService productService;
 	
-	@Autowired OrderService orderService;
+	@Autowired 
+	OrderService orderService;
+	
+	@Autowired 
+	OrderItemService orderItemService;
+	
+	@Autowired 
+	AddressService addressService;
+	
+	private static final Logger log = Logger.getLogger(ProductController.class);
 	
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
@@ -57,12 +67,58 @@ public class OrderController {
 	public String showOrderList(Model model, HttpSession session,@ModelAttribute("orderForm") OrderForm orderForm) {
 		Paging paging = new Paging(15);
 		paging.setIndexPage(1);
+		if(session.getAttribute(Constant.MSG_SUCCESS)!=null) {
+			model.addAttribute(Constant.MSG_SUCCESS,session.getAttribute(Constant.MSG_SUCCESS));
+			session.removeAttribute(Constant.MSG_SUCCESS);;
+		}
+		if(session.getAttribute(Constant.MSG_ERROR)!=null) {
+			model.addAttribute(Constant.MSG_ERROR,session.getAttribute(Constant.MSG_ERROR));
+			session.removeAttribute(Constant.MSG_ERROR);;
+		}
 		List<Order> orders = orderService.getAllOrder(paging, orderForm);
 		Map<String, String> mapStatus = MapStatus.getInstance().getMapStatus();
 		model.addAttribute("mapStatus",mapStatus);
 		model.addAttribute("pageInfor",paging);
 		model.addAttribute("orders", orders);
 		return "order-list";
+	}
+	
+	@GetMapping("/admin/order/detail/{id}")
+	public String orderDetail(Model model,@PathVariable("id") int id) {
+		Order order = orderService.getOrderDetailById(id);
+		List<OrderItem> items = orderItemService.findByOrderId(id);
+		Address address = addressService.getAddressDetailById(order.getAddress().getId());
+		model.addAttribute("address", address);
+		model.addAttribute("order", order);
+		model.addAttribute("items", items);
+		return "order-detail";
+	}
+	
+	@GetMapping("/admin/order/delete/{id}")
+	public String deleteCategory(Model model, @PathVariable("id") int id, HttpSession session) {
+		Order order = orderService.findById(id);
+		log.info(order.getCreateDate());
+		if(order!=null) {
+			try {
+				orderService.deleteOrder(order);
+				session.setAttribute(Constant.MSG_SUCCESS, "Delete success");
+			} catch (Exception e) {
+				session.setAttribute(Constant.MSG_ERROR, "Delete has error");
+			}
+		}
+		return "redirect:/admin/order/list";
+	}
+	
+	@GetMapping("/admin/order/change-status/{id}")
+	public String changeStatus(Model model, @PathVariable("id") int id, HttpSession session) {
+		try {
+			orderService.changeStatus(id);
+			session.setAttribute(Constant.MSG_SUCCESS, "Đã xác thực đơn hàng id = "+id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.setAttribute(Constant.MSG_ERROR, "Xác thực thất bại");
+		}
+		return "redirect:/admin/order/list";
 	}
 	
 	@RequestMapping(path="/admin/paging/order", produces="text/plain; charset=utf-8")

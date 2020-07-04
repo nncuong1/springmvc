@@ -1,6 +1,7 @@
 package com.nnc.service;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,8 +78,30 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return orderDao.findById(Order.class, id);
+	}
+
+	@Override
+	public void deleteOrder(Order order) throws Exception {
+		order.setActiveFlag(0);
+		order.setUpdateDate(new Date());
+		orderDao.update(order);
+		
+	}
+
+	@Override
+	public Order getOrderDetailById(int id) {
+		return orderDao.getOrderDetailById(id);
+	}
+
+	@Override
+	public void changeStatus(int id) {
+		Order order = orderDao.findById(Order.class, id);
+		if (order != null) {
+			order.setStatus(order.getActiveFlag() == 1 ? 2 : 1);
+			order.setUpdateDate(new Date());
+			orderDao.update(order);
+		}
 	}
 
 }

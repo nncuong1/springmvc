@@ -8,6 +8,9 @@ import com.nnc.util.Paging;
 
 public interface OrderService {
 	public void saveOrder(Order order) throws Exception;
+	public void deleteOrder(Order order) throws Exception;
 	public List<Order> getAllOrder	( Paging paging ,OrderForm orderForm);
 	public Order findById(int id);
+	public Order getOrderDetailById(int id);
+	public void changeStatus(int id);
 }

@@ -57,9 +57,12 @@
      <definition name="order-list" extends="base">
         <put-attribute name="body" value="/WEB-INF/views/order/order-list.jsp" />
     </definition> 
-     <definition name="review-list" extends="base">
+    <definition name="review-list" extends="base">
         <put-attribute name="body" value="/WEB-INF/views/review/review-list.jsp" />
-    </definition>  
+    </definition>
+    <definition name="order-detail" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/order/order-detail.jsp" />
+    </definition>   
     
         <!-- Default Web Template -->
     <definition name="web" template="/WEB-INF/views/web/web-base.jsp">
