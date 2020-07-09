@@ -12,9 +12,17 @@
 			<h5 class="card-header">Menu List</h5>
 			<div class="card-body">
 				<div class=row>
+					<!--  
 					<div class="col-sm-12 col-md-6">
 						<a href="<c:url value="/admin/menu/permission"/>" class="btn btn-app"><i class="fas fa-plus"></i>Permission</a>
 					</div>
+					<div class="col-sm-12 col-md-6">
+						<label class="switch">
+						  <input type="checkbox" onclick='handleClick(this);'>
+						  <span class="slider round"></span>
+						</label>
+					</div>
+					-->
 					<div class="col-sm-12 col-md-6">
 					<form id="searchForm" method="GET" action="<c:url value="/admin/menu/list"/>">
 						<div class="table_form_search">
@@ -58,8 +66,19 @@
 								-->
 								
 								<c:forEach items="${menu.mapAuth}" var="auth">
-									<td class="permission-${auth.value}"><i></i></td>
+								<td class="permission-${auth.value}">
+								<label class="switch">
+									<input type="checkbox" onclick='handleClick(${auth.value},${menu.id},${auth.key});'>
+									<span class="slider round"></span>
+								</label>
+								
+								</td>
+									<!-- <td class="permission-${auth.value}"><i></i></td>-->
 									<!--  
+									<label class="switch">
+									<input type="checkbox" onclick='handleClick(this);'>
+									<span class="slider round"></span>
+								</label>
 									<c:choose>
 										<c:when test="${auth.value==1}">
 											<td><i class="fa fa-check" style="color:green"></i></td>
@@ -101,11 +120,14 @@
 		$("body").on("click",".page-item",function(){
 			$(this).addClass("active").siblings().removeClass('active');
 			var pageIndex = $(this).text();
+			var urlParams = new URLSearchParams(window.location.search);
+			var key = urlParams.get('keyword');
 			 $.ajax({
 				 url: "/inventory/admin/paging/menu", 
 				 type :"GET",
 				 data : {
-					page : pageIndex
+					page : pageIndex,
+					keyword : key
 				 },
 				 success: function(value){
 				   var bodyMenu =  $("#table-menu").find("tbody");
@@ -120,6 +142,12 @@
 		})
 	});
 	
+	function handleClick(permission, menuId,roleId) {
+		if(confirm('Ban muon cap nhat quyen lai khong ?')){
+			window.location.href = "<c:url value='/admin/menu/update-permission?permission='/>"+permission+"&menuId="+menuId+"&roleId="+roleId;
+		}
+	}
+	
 	function loadUI(){
 		var status = $("#table-menu").find("td a");
 		$.each(status, function(index,item) {
@@ -131,8 +159,10 @@
 				item.text = "Enable";
 			}
 		});
-		$("#table-menu td.permission-0 i").addClass("fa fa-times").css("color", "red");
-		$("#table-menu td.permission-1 i").addClass("fa fa-check").css("color", "green");;
+		$("#table-menu td.permission-0 input").prop('checked', false);
+		$("#table-menu td.permission-1 input").prop('checked', true);
+		//$("#table-menu td.permission-0 i").addClass("fa fa-times").css("color", "red");
+		//$("#table-menu td.permission-1 i").addClass("fa fa-check").css("color", "green");
 	}
 	
 	function confirmChange(id,flag,item){

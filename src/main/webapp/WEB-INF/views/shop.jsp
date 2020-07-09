@@ -66,11 +66,10 @@
 	function gotoPage(page){
 		//$('#searchForm').attr('action','<c:url value="/shop?page="/>'+page);
 		$('#page').val(page);
-		// console.log("page : "+page);
-		$('#searchForm').attr('action',window.location.pathname+'?page='+page);
+		$('#search_mini_form').attr('action',window.location.pathname+'?page='+page);
 		$('#page').val(page);
 		//event.preventDefault();
-		$('#searchForm').submit();
+		$('#search_mini_form').submit();
 	}
 	function addToCart(productId){
 		

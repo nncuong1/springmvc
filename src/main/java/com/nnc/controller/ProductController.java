@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nnc.dto.ReviewDTO;
+import com.nnc.dto.SearchWebForm;
 import com.nnc.entity.Author;
 import com.nnc.entity.Category;
 import com.nnc.entity.Product;
@@ -292,7 +293,7 @@ public class ProductController {
 
 	@GetMapping("/product")
 	public String productDetail(Model model, @RequestParam(name = "productId") int id,
-			@RequestParam(required = false) Integer page, HttpSession session) throws Exception {
+			@RequestParam(required = false) Integer page, HttpSession session,  @ModelAttribute("search_mini_form") SearchWebForm searchForm) throws Exception {
 		List<Category> categories = categoryService.getAllCategory(null, null);
 		Product product = productService.findById(id);
 		List<Author> authors = authorService.findByBookId(id);

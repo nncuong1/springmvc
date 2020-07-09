@@ -11,6 +11,11 @@
 		<div class="card">
 			<h5 class="card-header">Danh sach binh luan</h5>
 			<div class="card-body">
+				<div class=row>
+					<div class="col-sm-12 col-md-6">
+						<a href="<c:url value="/admin/update-rating-file"/>" class="btn btn-app"><i class="fas fa-plus"></i>Cập nhật danh sách</a>
+					</div>
+				</div>
 				<table id="table-review" class="table table-striped">
 					<thead>
 						<tr>

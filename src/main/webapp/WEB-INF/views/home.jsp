@@ -55,10 +55,9 @@
 	            		<div class="col-lg-12">
 	            			<div class="slider__content">
 		            			<div class="contentbox">
-		            				<h2>Buy <span>your </span></h2>
-		            				<h2>favourite <span>Book </span></h2>
-		            				<h2>from <span>Here </span></h2>
-				                   	<a class="shopbtn" href="#">shop now</a>
+		            				<h2>Mua <span>sách</span></h2>
+		            				<h2>tại<span> đây</span></h2>  	
+		            				<a class="shopbtn" href="<c:url value="/shop"/>">Cửa hàng</a>
 		            			</div>
 	            			</div>
 	            		</div>
@@ -73,10 +72,9 @@
 	            		<div class="col-lg-12">
 	            			<div class="slider__content">
 		            			<div class="contentbox">
-		            				<h2>Buy <span>your </span></h2>
-		            				<h2>favourite <span>Book </span></h2>
-		            				<h2>from <span>Here </span></h2>
-				                   	<a class="shopbtn" href="#">shop now</a>
+		            				<h2>Mua <span>sách</span></h2>
+		            				<h2>tại<span> đây</span></h2>  
+		            				<a class="shopbtn" href="<c:url value="/shop"/>">Cửa hàng</a>
 		            			</div>
 	            			</div>
 	            		</div>
@@ -94,8 +92,7 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="section__title text-center">
-								<h2 class="title__be--2">New <span class="color--theme">Products</span></h2>
-								<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
+								<h2 class="title__be--2"><span class="color--theme">Sản phẩm mới</span></h2>
 							</div>
 						</div>
 					</div>
@@ -130,14 +127,14 @@
 					<div class="row">
 						<div class="col-lg-7 offset-lg-5 col-md-12 col-12 ptb--150">
 							<div class="section__title text-center">
-								<h2>Stay With Us</h2>
+								<h2>Đăng Ký Ngay</h2>
 							</div>
 							<div class="newsletter__block text-center">
-								<p>Subscribe to our newsletters now and stay up-to-date with new collections, the latest lookbooks and exclusive offers.</p>
+								<p>Đăng ký ngay với chúng tôi để nhận được nhiều ưu đãi và phần quá giá trị.</p>
 								<form action="#">
 									<div class="newsletter__box">
-										<input type="email" placeholder="Enter your e-mail">
-										<button>Subscribe</button>
+										<input type="email" placeholder="Đăng ký để nhận thông tin">
+										<button onclick="javascript:void(0);">Đăng ký</button>
 									</div>
 								</form>
 							</div>
@@ -151,8 +148,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="section__title text-center pb--50">
-							<h2 class="title__be--2">Best <span class="color--theme">Seller </span></h2>
-							<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
+							<h2 class="title__be--2"><span class="color--theme">SẢN PHẨM BÁN CHẠY </span></h2>
 						</div>
 					</div>
 				</div>

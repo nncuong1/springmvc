@@ -12,6 +12,7 @@
 				</ul>
 			</c:forEach>
 		</aside>
+		<!--  
 		<aside class="wedget__categories pro--range">
 			<h3 class="wedget__title">Lọc theo giá</h3>
 			<div class="content-shopby">
@@ -35,5 +36,6 @@
 				</div>
 			</div>
 		</aside>
+		-->
 	</div>
 </div>

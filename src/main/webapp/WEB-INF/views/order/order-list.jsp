@@ -123,6 +123,7 @@
 					   var bodyCategory =  $("#table-order").find("tbody");
 					   bodyCategory.empty();
 					   bodyCategory.append(value);
+					   loadUI()
 					 },
 					 error: function (error) {
 			         	console.log(error);
@@ -163,8 +164,6 @@
 				item.text = "Bị hủy";
 			}
 		});
-		$("#table-menu td.permission-0 i").addClass("fa fa-times").css("color", "red");
-		$("#table-menu td.permission-1 i").addClass("fa fa-check").css("color", "green");;
 	}
 	function processMessage(){
 		var msgSuccess = '${msgSuccess}';

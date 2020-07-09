@@ -107,13 +107,13 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public void updatePermission(AuthForm authForm) {
-		int roleId = authForm.getRoleId();
-		int menuId = authForm.getMenuId();
-		int permission = authForm.getPermission();
+	public void updatePermission(int permission, int menuId, int roleId) {
+//		int roleId = authForm.getRoleId();
+//		int menuId = authForm.getMenuId();
+//		int permission = authForm.getPermission();
 		Authority auth = authDao.findByRoleIdAndMenuId(roleId, menuId);
 		if(auth!=null) {
-			auth.setPermission(permission);
+			auth.setPermission(permission== 1 ? 0 : 1);
 			authDao.update(auth);
 		}else {
 			auth = new Authority();

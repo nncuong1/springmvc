@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.nnc.dao.AuthorDao;
 import com.nnc.dao.ProductDao;
+import com.nnc.dto.SearchWebForm;
 import com.nnc.entity.Author;
 import com.nnc.entity.Product;
 import com.nnc.util.Paging;
@@ -117,16 +118,32 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.findByProperty(property, value);
 	}
 
+	public List<Product> getAllProduct(SearchWebForm searchForm, Paging paging) {
+		StringBuilder queryStr = new StringBuilder();
+		Map<String, Object> mapParams = new HashMap<String, Object>();
+		if (searchForm.getKeyword() != null) {
+			queryStr.append(" and p.title like :title or p.description like :description or p.category.name like :name");
+			mapParams.put("title", "%"+searchForm.getKeyword()+"%");
+			mapParams.put("description", "%"+searchForm.getKeyword()+"%");
+			mapParams.put("name", "%"+searchForm.getKeyword()+"%");
+		}
+
+		//return productDao.findAll(queryStr.toString(), mapParams, paging);
+		return productDao.searchProductWithCriteria(queryStr.toString(), mapParams, paging);
+	}
+	
 	public List<Product> getAllProduct(String keyword, Paging paging) {
 		StringBuilder queryStr = new StringBuilder();
 		Map<String, Object> mapParams = new HashMap<String, Object>();
-		if (keyword != null) {
-			queryStr.append(" and model.title like :title or model.description like :description");
+		if (keyword!= null) {
+			queryStr.append(" and p.title like :title or p.description like :description or p.category.name like :name");
 			mapParams.put("title", "%"+keyword+"%");
 			mapParams.put("description", "%"+keyword+"%");
+			mapParams.put("name", "%"+keyword+"%");
 		}
 
-		return productDao.findAll(queryStr.toString(), mapParams, paging);
+		//return productDao.findAll(queryStr.toString(), mapParams, paging);
+		return productDao.searchProductWithCriteria(queryStr.toString(), mapParams, paging);
 	}
 
 	public Product findById(int id) {

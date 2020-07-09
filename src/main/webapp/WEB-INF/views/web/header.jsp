@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!-- Header -->
 <header id="wn__header" class="oth-page header__area header__absolute sticky__header">
     <div class="container-fluid">
@@ -76,15 +77,15 @@
     </div>		
 </header>
 <div class="box-search-content search_active block-bg close__top">
-    <form id="searchForm" action="/inventory/shop" method="get" id="search_mini_form" class="minisearch">
+    <form:form modelAttribute="search_mini_form" servletRelativeAction="/inventory/shop" method="get" cssClass="minisearch">
         <div class="field__search">
-            <input type="text" placeholder="Tìm kiếm theo tên hoặc thể loại.." name="key">
-            <input type="hidden" name="page" id="page"/> 
+            <form:input  placeholder="Tìm kiếm theo tên hoặc thể loại.." path="keyword"/>
+              <input type="hidden" name="page" id="page"/> 
             <div class="action">
                 <a href="#"><i class="zmdi zmdi-search"></i></a>
             </div>
         </div>
-    </form>
+    </form:form>
     <div class="close__wrap">
         <span>đóng</span>
     </div>

@@ -1,6 +1,7 @@
 package com.nnc.dao;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.hibernate.query.Query;
@@ -80,5 +81,32 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao<P
 	public List<Product> getBestSellerProduct(List<Integer> ids) {
 		List<Product> products = sessionFactory.getCurrentSession().byMultipleIds(Product.class).multiLoad(ids);
 		return products;
+	}
+	@Override
+	public List<Product> searchProductWithCriteria(String queryStr, Map<String, Object> mapParams, Paging paging) {
+		StringBuilder queryString = new StringBuilder();
+		StringBuilder countQuery = new StringBuilder();
+		countQuery.append(" select count(*) from product p where p.activeFlag = 1");
+		
+		queryString.append(" from product p join fetch p.category where p.activeFlag=1");
+		if(queryStr!=null && !queryStr.isEmpty()) {
+			queryString.append(queryStr);
+			countQuery.append(queryStr);
+		} 
+		Query query = sessionFactory.getCurrentSession().createQuery(queryString.toString());
+		Query countQ = sessionFactory.getCurrentSession().createQuery(countQuery.toString());
+		if(mapParams!=null && !mapParams.isEmpty()) {
+			for(String key : mapParams.keySet()) {
+				query.setParameter(key,   mapParams.get(key) );
+				countQ.setParameter(key,  mapParams.get(key) );
+			}
+		}
+		if(paging!=null) {
+			query.setFirstResult(paging.getOffset()); // bat dau tu dau (0)
+			query.setMaxResults(paging.getRecordPerPage());
+			long totalRecords = (Long) countQ.uniqueResult();
+			paging.setTotalRows(totalRecords);
+		}
+		return query.getResultList();
 	}
 }

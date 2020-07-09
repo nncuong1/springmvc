@@ -37,5 +37,22 @@ public class LoginValidator implements Validator{
 		}
 		
 	}
+	
+	public void validateCustomer(Object target, Errors errors) {
+		User user = (User) target;
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "msg.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "msg.required");
+		if(!StringUtils.isEmpty(user.getUsername()) && !StringUtils.isEmpty(user.getPassword())) {
+			User u = userService.findByUserName(user.getUsername());
+			if(user!=null && u!=null) {
+				if(!u.getPassword().equals(user.getPassword())) {
+					errors.rejectValue("password", "msg.wrong.password");
+				}
+			}else {
+				errors.rejectValue("username", "msg.wrong.username");
+			}
+		}
+		
+	}
 
 }

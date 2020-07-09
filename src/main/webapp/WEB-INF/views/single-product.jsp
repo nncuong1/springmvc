@@ -5,6 +5,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <c:url var="reviewPostAPI" value="/api/reviews" />
 <c:url var="reviewGetAPI" value="/paging/review" />
+<script src="<c:url value="/static/admin/libs/js/jsonForm.js"/>"></script>
 <!-- Start main Content -->
 <div class="maincontent bg--white pt--80 pb--55">
 	<div class="container">

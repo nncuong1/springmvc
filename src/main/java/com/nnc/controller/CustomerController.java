@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nnc.dto.SearchWebForm;
 import com.nnc.entity.Address;
 import com.nnc.entity.District;
 import com.nnc.entity.Order;
@@ -51,8 +52,6 @@ public class CustomerController {
 	@Autowired
 	DistrictService districtService;
 	
-	@Autowired
-	private CategoryService categoryService;
 	
 	private static final Logger log = Logger.getLogger(ProductController.class);
 
@@ -124,33 +123,23 @@ public class CustomerController {
 	
 
 	@GetMapping("/customer/order-success")
-	public String successOrder(HttpSession session) {
+	public String successOrder(HttpSession session, @ModelAttribute("search_mini_form") SearchWebForm searchForm) {
 		//session.setAttribute(Constant.MSG_PREVIOUS_PAGE, "/customer/order-success");
 		return "success-order";
 	}
 	
 	@GetMapping("/customer/checkout")
-	public String checkout(HttpSession session, Model model) {
+	public String checkout(HttpSession session, Model model, @ModelAttribute("search_mini_form") SearchWebForm searchForm) {
 		User customer = (User) session.getAttribute(Constant.CUSTOMER_INFOR);
 		List<Address> addresses = addressService.findByCustomerId(customer.getId());
-		//List<Category> categories = categoryService.getAllCategory(null,null);
 		List<Province> provinces = provinceService.findAll();
 		List<District> districts = districtService.findAll();
-//		Map<String, String> mapProvince = new TreeMap<String, String>();
-//		Map<String, String> mapDistrict = new TreeMap<String, String>();
-//		for (District district : districts) {
-//			mapDistrict.put(String.valueOf(district.getId()), district.getName());
-//		}
-//		for (Province province : provinces) {
-//			mapProvince.put(String.valueOf(province.getId()), province.getName());
-//		}
+
 		model.addAttribute("addressForm", new Address());
 		model.addAttribute("addresses", addresses);
 		model.addAttribute("provinces", provinces);
 		model.addAttribute("districts", districts);
-		//model.addAttribute("mapProvince", mapProvince);
-		//model.addAttribute("mapDistrict", mapDistrict);
-		//model.addAttribute("categories", categories);
+
 		return "checkout";
 	}
 }

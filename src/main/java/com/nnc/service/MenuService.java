@@ -14,5 +14,5 @@ public interface MenuService {
 	public List<Menu> findWithoutNPlusOne(Paging paging , String keyword);
 	public Map<Integer, Integer> getMapAuths(List<Role> roles, List<Menu> menuList);
 	public void changeStatus(int id);
-	public void updatePermission(AuthForm authForm);
+	public void updatePermission(int permission, int menuId, int roleId);
 }

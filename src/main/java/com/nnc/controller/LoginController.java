@@ -101,7 +101,7 @@ public class LoginController {
 	}
 	@PostMapping("/login")
 	public String processCustomerLogin(Model model, @ModelAttribute("customerForm") User user, BindingResult result, HttpSession session, @RequestParam(required = false) String from) {
-		loginValidator.validate(user, result);
+		loginValidator.validateCustomer(user, result);
 		if(result.hasErrors()) {
 			return "login-web";
 		}

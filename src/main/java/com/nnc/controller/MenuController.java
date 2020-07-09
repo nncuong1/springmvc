@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
+import org.mortbay.log.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,10 +69,22 @@ public class MenuController {
 		return "redirect:/admin/menu/list";
 	}
 	
-	@PostMapping("/admin/menu/update-permission")
-	public String updatePermission(Model model,HttpSession session,@ModelAttribute("authForm") AuthForm authForm ) {
+//	@PostMapping("/admin/menu/update-permission")
+//	public String updatePermission(Model model,HttpSession session,@ModelAttribute("authForm") AuthForm authForm ) {
+//		try {
+//			menuService.updatePermission(authForm);
+//			session.setAttribute(Constant.MSG_SUCCESS, "Update success!!!");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			session.setAttribute(Constant.MSG_ERROR, "Update has error!!!");
+//		}
+//		return "redirect:/admin/menu/list";
+//	}
+	
+	@GetMapping("/admin/menu/update-permission")
+	public String updatePermission(Model model, HttpSession session,@RequestParam Integer permission, @RequestParam Integer menuId, @RequestParam Integer roleId) {
 		try {
-			menuService.updatePermission(authForm);
+			menuService.updatePermission(permission,menuId,roleId);
 			session.setAttribute(Constant.MSG_SUCCESS, "Update success!!!");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -108,7 +121,12 @@ public class MenuController {
 			builder.append("<a href='javascript:void(0);' style='text-decoration:none' onclick='confirmChange("+menu.getId()+","+menu.getActiveFlag()+")'>"+menu.getActiveFlag()+"</a>");
 			builder.append("</td>");
 			for(Entry<Integer, Integer> entry:menu.getMapAuth().entrySet()) {
-				builder.append("<td class='permission-"+entry.getValue()+"'><i></i></td>");
+				builder.append("<td class='permission-"+entry.getValue()+"'>");
+				builder.append("<label class='switch'>");
+				builder.append("<input type='checkbox' onclick='handleClick("+entry.getValue()+","+menu.getId()+","+entry.getKey()+")'>");
+				builder.append("<span class='slider round'></span>");
+				builder.append("</label>");
+				builder.append("</td>");
 			}
 			builder.append("</tr>");
 		}

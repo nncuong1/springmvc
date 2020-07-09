@@ -76,7 +76,7 @@ public class CategoryController {
 	@RequestMapping("/category/list")
 	public String showCategoryList(Model model, HttpSession session,@RequestParam(name="keyword", required = false) String keyword) {
 	//public String showCategoryList(Model model, HttpSession session,@ModelAttribute("searchForm") String keyword) {
-		Paging paging = new Paging(3);
+		Paging paging = new Paging(12);
 		paging.setIndexPage(1);
 		List<Category> categories = categoryService.getAllCategory(keyword,paging);
 		if(session.getAttribute(Constant.MSG_SUCCESS)!=null) {
@@ -96,7 +96,7 @@ public class CategoryController {
 	@ResponseBody
 	public String showCategories(Model model, HttpSession session,@RequestParam(name="keyword", required = false) String keyword,
 			@RequestParam(required = false) int page) {
-		Paging paging = new Paging(3);
+		Paging paging = new Paging(12);
 		paging.setIndexPage(page);
 		List<Category> categories = categoryService.getAllCategory(keyword,paging);
 		StringBuilder builder = new StringBuilder();

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nnc.dto.OrderForm;
+import com.nnc.dto.SearchWebForm;
 import com.nnc.entity.Address;
 import com.nnc.entity.Category;
 import com.nnc.entity.Order;
@@ -226,7 +227,7 @@ public class OrderController {
 	}
 	
 	@GetMapping("/cart")
-	public String viewCart(HttpSession session, Model model) {
+	public String viewCart(HttpSession session, Model model, @ModelAttribute("search_mini_form") SearchWebForm searchForm) {
 		if(session.getAttribute(Constant.MSG_NO_ITEM)!=null) {
 			model.addAttribute(Constant.MSG_NO_ITEM,session.getAttribute(Constant.MSG_NO_ITEM));
 			session.removeAttribute(Constant.MSG_NO_ITEM);;
