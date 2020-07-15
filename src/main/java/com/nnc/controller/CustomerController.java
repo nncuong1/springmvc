@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nnc.dto.SearchWebForm;
 import com.nnc.entity.Address;
@@ -27,7 +25,6 @@ import com.nnc.entity.OrderItemId;
 import com.nnc.entity.Province;
 import com.nnc.entity.User;
 import com.nnc.service.AddressService;
-import com.nnc.service.CategoryService;
 import com.nnc.service.DistrictService;
 import com.nnc.service.OrderItemService;
 import com.nnc.service.OrderService;

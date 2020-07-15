@@ -11,8 +11,6 @@ public class ProvinceDaoImpl extends BaseDaoImpl<Province> implements ProvinceDa
 	
 	@Override
 	public List<Province> findAll() {
-//		String hql = "from province";
-//		Query<Province> query = sessionFactory.getCurrentSession().createQuery(hql);
 		List<Province> provinces = sessionFactory.getCurrentSession().createQuery("from province p order by p.id asc",Province.class).getResultList();
 		return provinces;
 	}

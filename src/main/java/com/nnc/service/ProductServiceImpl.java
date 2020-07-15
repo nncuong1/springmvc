@@ -42,9 +42,6 @@ public class ProductServiceImpl implements ProductService {
 		if (product.getAuthorId() != null && !product.getAuthorId().isEmpty()) {
 			for (String authorId : product.getAuthorId()) {
 				log.info("Author id : "+authorId);	
-//				Author a = new Author();
-//				a.setId(Integer.parseInt(authorId));
-//				product.addAuthor(a);
 				product.addAuthor(authorDao.findById(Author.class,Integer.parseInt(authorId)));
 			}
 		}

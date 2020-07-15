@@ -8,7 +8,6 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.nnc.entity.Product;
-import com.nnc.entity.User;
 import com.nnc.util.Paging;
 
 @Repository
@@ -21,8 +20,6 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao<P
 	}
 	public List<Product> findBookByCategoryId(int id, Paging paging) {
 		Query<Product> query  =sessionFactory.getCurrentSession().createQuery("select p from product p inner join p.category c where c.id = :id and p.activeFlag = 1",Product.class).setParameter("id", id);
-//		List<Product> products =sessionFactory.getCurrentSession().
-//				createQuery(" select p from product p inner join p.category c where c.id = :id",Product.class).setParameter("id", id).getResultList();
 		Long count =(Long) sessionFactory.getCurrentSession().createQuery(" select count(*) from product p inner join p.category c where c.id = :id and p.activeFlag = 1").setParameter("id", id).uniqueResult();
 		if(paging!=null) {
 			query.setFirstResult(paging.getOffset()); // bat dau tu dau (0)

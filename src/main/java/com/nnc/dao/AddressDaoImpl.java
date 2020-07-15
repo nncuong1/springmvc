@@ -5,9 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.nnc.entity.Address;
-import com.nnc.entity.Authority;
-import com.nnc.entity.OrderItem;
-import com.nnc.entity.Province;
 
 @Repository
 public class AddressDaoImpl extends BaseDaoImpl<Address> implements AddressDao<Address> {

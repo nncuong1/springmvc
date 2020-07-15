@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.nnc.entity.User;
 import com.nnc.service.UserService;
-import com.nnc.util.Csv;
-import com.nnc.util.CsvFile;
 import com.nnc.validator.RegisterValidator;
 
 @Controller
@@ -25,7 +23,6 @@ public class RegisterController {
 	@GetMapping("/register")
 	public String customerRegister(Model model) {
 		model.addAttribute("registerForm", new User());
-		//CsvFile.readCsv("classpath:file/test.csv");
 		return "register";
 	}
 	

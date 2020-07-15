@@ -1,7 +1,6 @@
 package com.nnc.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -76,30 +75,6 @@ public class ProductController {
 		}
 	}
 
-//	@RequestMapping(value= {"/product/list","/product/list/"})
-//	public String redirect() {
-//		return "redirect:/admin/product/list/1";
-//	}
-
-//	@RequestMapping("/product/list/{page}")
-//	public String showproductList(Model model, HttpSession session,@RequestParam(name="keyword", required = false) String keyword,
-//			 @PathVariable("page") int page) {
-//		Paging paging = new Paging(3);
-//		paging.setIndexPage(page);
-//		List<product> products = productService.getAllproduct(keyword,paging);
-//		if(session.getAttribute(Constant.MSG_SUCCESS)!=null) {
-//			model.addAttribute(Constant.MSG_SUCCESS,session.getAttribute(Constant.MSG_SUCCESS));
-//			session.removeAttribute(Constant.MSG_SUCCESS);;
-//		}
-//		if(session.getAttribute(Constant.MSG_ERROR)!=null) {
-//			model.addAttribute(Constant.MSG_ERROR,session.getAttribute(Constant.MSG_ERROR));
-//			session.removeAttribute(Constant.MSG_ERROR);;
-//		}
-//		model.addAttribute("pageInfor",paging);
-//		model.addAttribute("products", products);
-//		return "product-list";
-//	}
-
 	@RequestMapping("/admin/product/list")
 	public String showproductList(Model model, HttpSession session,
 			@RequestParam(name = "keyword", required = false) String keyword) {
@@ -118,13 +93,6 @@ public class ProductController {
 		}
 		model.addAttribute("pageInfor", paging);
 		model.addAttribute("products", products);
-//		log.info("query la : ");
-//		Product p16 = productService.findBookDetailById(16);
-//		Set<Author> authors = p16.getAuthors();
-//		for(Author a: authors) {
-//			log.info(a.getId()+" "+a.getName());
-//		}
-//		log.info("end query");
 		return "product-list";
 	}
 
@@ -312,21 +280,6 @@ public class ProductController {
 		} else {
 			recommendedProducts = productService.getRecommendedProducts(null, id, product.getCategory().getId());
 		}
-
-//		List<Long> multId = recommendService.itemBasedRecommendation(id);
-//		List<Product> recommendedProducts = null;
-//		if (multId != null && !multId.isEmpty()) {
-//			log.info("item-based product ");
-//			recommendedProducts = productService.getRecommendedProducts(multId);
-//			for (Product p : recommendedProducts) {
-//				log.info("recomendation id : " + p.getId() + ", name : " + p.getTitle());
-//			}
-//		} else {
-//			log.info("related product ");
-//			recommendedProducts = productService.getRelatedProduct(id, product.getCategory().getId());
-//		}
-//		
-
 		model.addAttribute("recommendedProducts", recommendedProducts);
 		model.addAttribute("pageInfor", paging);
 		model.addAttribute("authors", authors);

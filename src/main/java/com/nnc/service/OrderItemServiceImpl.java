@@ -7,9 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nnc.dao.OrderDao;
 import com.nnc.dao.OrderItemDao;
-import com.nnc.entity.Order;
 import com.nnc.entity.OrderItem;
 
 @Service

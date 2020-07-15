@@ -4,22 +4,20 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
 
-import org.mortbay.log.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.nnc.dto.AuthForm;
 import com.nnc.entity.Authority;
 import com.nnc.entity.Menu;
@@ -68,18 +66,6 @@ public class MenuController {
 		}
 		return "redirect:/admin/menu/list";
 	}
-	
-//	@PostMapping("/admin/menu/update-permission")
-//	public String updatePermission(Model model,HttpSession session,@ModelAttribute("authForm") AuthForm authForm ) {
-//		try {
-//			menuService.updatePermission(authForm);
-//			session.setAttribute(Constant.MSG_SUCCESS, "Update success!!!");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			session.setAttribute(Constant.MSG_ERROR, "Update has error!!!");
-//		}
-//		return "redirect:/admin/menu/list";
-//	}
 	
 	@GetMapping("/admin/menu/update-permission")
 	public String updatePermission(Model model, HttpSession session,@RequestParam Integer permission, @RequestParam Integer menuId, @RequestParam Integer roleId) {

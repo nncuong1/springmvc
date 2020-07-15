@@ -1,14 +1,9 @@
 package com.nnc.service;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -19,11 +14,9 @@ import com.nnc.dao.ProductDao;
 import com.nnc.dao.ReviewDao;
 import com.nnc.dao.UserDao;
 import com.nnc.dto.ReviewDTO;
-import com.nnc.entity.Review;
 import com.nnc.entity.Product;
 import com.nnc.entity.Review;
 import com.nnc.entity.User;
-import com.nnc.util.Constant;
 import com.nnc.util.DateUtil;
 import com.nnc.util.Paging;
 import com.nnc.util.ReviewConverter;

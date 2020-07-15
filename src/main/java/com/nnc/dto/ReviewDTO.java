@@ -1,7 +1,5 @@
 package com.nnc.dto;
 
-import java.util.Date;
-
 public class ReviewDTO {
 	
 	private Float rating;

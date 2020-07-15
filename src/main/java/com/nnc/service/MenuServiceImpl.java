@@ -2,8 +2,6 @@ package com.nnc.service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.nnc.dao.AuthDao;
 import com.nnc.dao.MenuDao;
-import com.nnc.dto.AuthForm;
 import com.nnc.entity.Authority;
 import com.nnc.entity.Menu;
 import com.nnc.entity.Role;
@@ -30,15 +27,12 @@ public class MenuServiceImpl implements MenuService {
 	private AuthDao<Authority> authDao;
 
 	public List<Menu> getMenuForRole(List<Authority> auths) {
-		// Role role = roleDao.findById(Role.class, roleId);
 		List<Menu> menuList = new ArrayList<Menu>();
 		// khoi tao menu list con
 		List<Menu> menuChildList = new ArrayList<Menu>();
-		// List<Authority> auths =authDao.getAuthByRoleId(roleId);
 
 		// lay danh sach auth theo role , menu theo auth
 		for (Authority auth : auths) {
-			// Authority auth = (Authority) obj;
 			Menu menu = auth.getMenu();
 			if (menu.getParentId() == 0 && menu.getOrderIndex() != -1 && menu.getActiveFlag() == 1
 					&& auth.getPermission() == 1 && auth.getActiveFlag() == 1) {
@@ -59,34 +53,22 @@ public class MenuServiceImpl implements MenuService {
 			}
 			menu.setChild(childList);
 		}
-		// sortMenu(menuList);
 		menuList.sort((Menu m1, Menu m2) -> m1.getOrderIndex() - m2.getOrderIndex());
 		for (Menu menu : menuList) {
-			// sortMenu(menu.getChild());
 			menu.getChild().sort((Menu m1, Menu m2) -> m1.getOrderIndex() - m2.getOrderIndex());
 		}
 		return menuList;
 	}
-//	public void sortMenu(List<Menu> menus) {
-//		Collections.sort(menus,new Comparator<Menu>() {
-//			public int compare(Menu o1, Menu o2) {
-//				return o1.getOrderIndex()-o2.getOrderIndex();
-//			}
-//		});
-//	}
 
 	@Override
 	public List<Menu> findWithoutNPlusOne(Paging paging, String keyword) {
 		StringBuilder queryStr = new StringBuilder();
-		// queryStr.append(" or model.activeFlag=0");
 		Map<String, Object> mapParams = new HashMap<>();
 		if (keyword != null) {
 			queryStr.append(" where m.url like :url");
 			mapParams.put("url", "%"+keyword+"%");
 		}
 		List<Menu> menuList = menuDao.findWithoutNPlusOne(paging, queryStr.toString(), mapParams);
-		// List<Menu> menuList = menuDao.findAll(queryStr.toString(), mapParams,
-		// paging);
 		return menuList;
 	}
 
@@ -108,9 +90,6 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public void updatePermission(int permission, int menuId, int roleId) {
-//		int roleId = authForm.getRoleId();
-//		int menuId = authForm.getMenuId();
-//		int permission = authForm.getPermission();
 		Authority auth = authDao.findByRoleIdAndMenuId(roleId, menuId);
 		if(auth!=null) {
 			auth.setPermission(permission== 1 ? 0 : 1);

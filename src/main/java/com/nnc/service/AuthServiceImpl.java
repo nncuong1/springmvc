@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nnc.dao.AuthDao;
-import com.nnc.entity.Author;
 import com.nnc.entity.Authority;
-import com.nnc.entity.Author;
-import com.nnc.util.Paging;
 
 @Service
 @Transactional

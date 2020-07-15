@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.nnc.dto.OrderForm;
 import com.nnc.dto.SearchWebForm;
 import com.nnc.entity.Address;
-import com.nnc.entity.Category;
 import com.nnc.entity.Order;
 import com.nnc.entity.OrderItem;
 import com.nnc.entity.Product;

@@ -1,7 +1,6 @@
 package com.nnc.controller;
 
 import java.util.List;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nnc.dto.ReviewDTO;
-import com.nnc.entity.Menu;
 import com.nnc.entity.Review;
-import com.nnc.entity.Role;
 import com.nnc.service.ReviewService;
 import com.nnc.util.Constant;
 import com.nnc.util.Paging;

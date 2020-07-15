@@ -22,22 +22,6 @@ public class BaseDaoImpl<E> implements BaseDao<E>{
 	@Autowired
 	SessionFactory sessionFactory;
 	
-//	public List<E> findAll(String queryStr, Map<String,Object> mapParams) {
-//		StringBuilder queryString = new StringBuilder();
-//		queryString.append(" from ").append(getGenericName()).append(" as model where model.activeFlag=1");
-//		if(queryStr!=null && !queryStr.isEmpty()) {
-//			queryString.append(queryStr);
-//		} 
-//		Query<E> query = sessionFactory.getCurrentSession().createQuery(queryString.toString());
-//		if(mapParams!=null && !mapParams.isEmpty()) {
-//			for(String key : mapParams.keySet()) {
-//				query.setParameter(key, "%" + mapParams.get(key) + "%");
-//			}
-//		}
-//		return query.getResultList();
-//	//	return sessionFactory.getCurrentSession().createQuery(queryString.toString()).getResultList();
-//	}
-	
 	public List<E> findAll(String queryStr, Map<String,Object> mapParams, Paging paging) {
 		StringBuilder queryString = new StringBuilder();
 		StringBuilder countQuery = new StringBuilder();

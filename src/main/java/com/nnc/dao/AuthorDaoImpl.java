@@ -13,8 +13,6 @@ public class AuthorDaoImpl extends BaseDaoImpl<Author> implements AuthorDao<Auth
 
 	@Override
 	public List<Author> findByBookId(int id) {
-//		List<Author> authors =sessionFactory.getCurrentSession().
-//				createQuery("from author a join a.products p where p.id = :id",Author.class).setParameter("id", id).getResultList();
 		List<Author> authors =sessionFactory.getCurrentSession().
 				createQuery("select a from author a join a.products p where p.id = :id",Author.class).setParameter("id", id).getResultList();
 		return authors;

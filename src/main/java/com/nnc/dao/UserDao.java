@@ -2,7 +2,6 @@ package com.nnc.dao;
 
 import java.util.List;
 
-import com.nnc.entity.Role;
 import com.nnc.entity.User;
 
 public interface UserDao<E> extends BaseDao<E> {

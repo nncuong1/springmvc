@@ -14,7 +14,6 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -102,7 +101,6 @@ public class UserController {
 			Map<String, String> mapRole = new HashMap<String,String>();
 			for(Role role : roles) {
 				mapRole.put(String.valueOf(role.getId()), role.getRoleName());
-				//log.info("Thong tin role : "+role.getId()+", name : "+role.getRoleName());
 			}
 			//UserRole userRole =(UserRole) user.getUserRoles().iterator().next();
 			//user.setRoleID(userRole.getRole().getId());

@@ -1,7 +1,6 @@
 package com.nnc.controller;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.nnc.dto.OrderForm;
 import com.nnc.dto.SearchWebForm;
 import com.nnc.entity.Category;
 import com.nnc.entity.Product;
@@ -30,26 +28,6 @@ public class HomeController {
 	private CategoryService categoryService;
 	
 	private static final Logger log = Logger.getLogger(ProductServiceImpl.class);
-	
-	
-//	@RequestMapping("/shop")
-//	public String shop(Model model, @RequestParam(required = false) String page, @RequestParam(required = false) String key) {
-//		Paging paging = new Paging(9);
-//		if(page==null || StringUtils.isEmpty(page)) {
-//			paging.setIndexPage(1);
-//		}else {
-//			paging.setIndexPage(Integer.parseInt(page));
-//		}
-//		if(key==null || key.isEmpty()) {
-//			key = null;
-//		}
-//		List<Product> products = productService.getAllProduct(key, paging);
-//		List<Category> categories = categoryService.getAllCategory(null, null);
-//		model.addAttribute("pageInfor",paging);
-//		model.addAttribute("products", products);
-//		model.addAttribute("categories",categories);
-//		return "shop";
-//	}
 	
 	@RequestMapping("/shop")
 	public String shop(Model model, @ModelAttribute("search_mini_form") SearchWebForm searchForm,  @RequestParam(required = false) Integer page) {

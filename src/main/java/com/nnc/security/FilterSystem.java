@@ -1,6 +1,5 @@
 package com.nnc.security;
 
-import java.net.URLEncoder;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,10 +19,7 @@ public class FilterSystem implements HandlerInterceptor {
 			throws Exception {
 		
 		User user = (User) request.getSession().getAttribute(Constant.USER_INFOR);
-//		String from = URLEncoder.encode(request.getRequestURI(), "UTF-8");
-//		if (request.getQueryString() != null) {
-//		    from += "?" + request.getQueryString();
-//		}
+
 //		log.info("from : "+from);
 		if (user == null) {
 			response.sendRedirect(request.getContextPath() + "/admin/login");
@@ -34,9 +30,6 @@ public class FilterSystem implements HandlerInterceptor {
 				response.sendRedirect(request.getContextPath() + "/admin/access-denied");
 				return false;
 			} else {
-				// List<Authority> auths = (List<Authority>)
-				// request.getSession().getAttribute(Constant.AUTHS_SESSION);
-
 				Set<Authority> auths = (Set<Authority>) user.getRole().getAuths();
 				for(Authority auth : auths) {
 					//log.info(auth.getMenu().getId()+" : "+auth.getPermission());

@@ -49,30 +49,6 @@ public class CategoryController {
 		}
 	}
 	
-//	@RequestMapping(value= {"/category/list","/category/list/"})
-//	public String redirect() {
-//		return "redirect:/admin/category/list/1";
-//	}
-	
-//	@RequestMapping("/category/list/{page}")
-//	public String showCategoryList(Model model, HttpSession session,@RequestParam(name="keyword", required = false) String keyword,
-//			 @PathVariable("page") int page) {
-//		Paging paging = new Paging(3);
-//		paging.setIndexPage(page);
-//		List<Category> categories = categoryService.getAllCategory(keyword,paging);
-//		if(session.getAttribute(Constant.MSG_SUCCESS)!=null) {
-//			model.addAttribute(Constant.MSG_SUCCESS,session.getAttribute(Constant.MSG_SUCCESS));
-//			session.removeAttribute(Constant.MSG_SUCCESS);;
-//		}
-//		if(session.getAttribute(Constant.MSG_ERROR)!=null) {
-//			model.addAttribute(Constant.MSG_ERROR,session.getAttribute(Constant.MSG_ERROR));
-//			session.removeAttribute(Constant.MSG_ERROR);;
-//		}
-//		model.addAttribute("pageInfor",paging);
-//		model.addAttribute("categories", categories);
-//		return "category-list";
-//	}
-	
 	@RequestMapping("/category/list")
 	public String showCategoryList(Model model, HttpSession session,@RequestParam(name="keyword", required = false) String keyword) {
 	//public String showCategoryList(Model model, HttpSession session,@ModelAttribute("searchForm") String keyword) {

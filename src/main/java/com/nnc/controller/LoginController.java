@@ -28,7 +28,6 @@ import com.nnc.util.Constant;
 import com.nnc.validator.LoginValidator;
 
 @Controller
-//@RequestMapping("/admin")
 public class LoginController {
 	
 	@Autowired
@@ -108,13 +107,7 @@ public class LoginController {
 		
 		User u = userService.findByUserName(user.getUsername());
 		session.setAttribute(Constant.CUSTOMER_INFOR, u);
-//		if(session.getAttribute(Constant.MSG_PREVIOUS_PAGE)!=null) {
-//			String url = (String)session.getAttribute(Constant.MSG_PREVIOUS_PAGE);
-//			session.removeAttribute(Constant.MSG_PREVIOUS_PAGE);
-//			return "redirect:"+url;
-//		}
 		if(from!=null && !from.isEmpty()) {
-			//log.info("request from : "+from.substring(0, from.length()-1));
 			return "redirect:"+from.substring(0, from.length()-1);
 		}else {
 			log.info("no from : ");

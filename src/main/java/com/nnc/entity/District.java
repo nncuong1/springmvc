@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.NaturalId;
-
 @Entity(name = "district")
 public class District implements Serializable {
 
