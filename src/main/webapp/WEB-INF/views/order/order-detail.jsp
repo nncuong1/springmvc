@@ -11,19 +11,6 @@
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 				<div class="page-header">
 					<h3 class="mb-2"> Chi tiết đơn hàng </h3>
-					<p class="pageheader-text">Proin placerat ante duiullam
-						scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi
-						lobortis pulvinar quam.</p>
-					<div class="page-breadcrumb">
-						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#"
-									class="breadcrumb-link">Dashboard</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Influencer
-									Profile Template</li>
-							</ol>
-						</nav>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -44,15 +31,15 @@
 						<h3 class="font-16">Thông tin người nhận </h3>
 						<div class="">
 							<ul class="list-unstyled mb-0">
-								<li class="mb-2"><i class="fas fa-fw fa-envelope mr-2"></i>${address.fullName}</li>
-								<li class="mb-0"><i class="fas fa-fw fa-phone mr-2"></i>${address.phone}</li>
+								<li class="mb-2"><i class="fas fa-fw fa-envelope mr-2"></i>${order.address.fullName}</li>
+								<li class="mb-0"><i class="fas fa-fw fa-phone mr-2"></i>${order.address.phone}</li>
 							</ul>
 						</div>
 					</div>
 					<div class="card-body border-top">
 						<h3 class="font-16">Địa chỉ giao hàng</h3>
 						<div>
-							<p>${address.addr}, ${address.district.prefix} ${address.district.name}, ${address.province.name}</p>
+							<p>${order.address.addr}, ${order.address.district.prefix} ${order.address.district.name}, ${order.address.province.name}</p>
 						</div>
 					</div>
 				</div>
@@ -74,7 +61,7 @@
 								<div class="col-md-12 mb-6">
 								 <table class="table table-striped">
                                         <tbody>
-                                       		<c:forEach var="item" items="${items}">
+                                       		<c:forEach var="item" items="${order.items}">
                                             <tr>
                                                 <td>${item.product.title}</td>
                                                 <td>${item.unitPrice} x ${item.quantity}</td>

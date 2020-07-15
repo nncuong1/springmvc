@@ -87,11 +87,11 @@ public class OrderController {
 	@GetMapping("/admin/order/detail/{id}")
 	public String orderDetail(Model model,@PathVariable("id") int id) {
 		Order order = orderService.getOrderDetailById(id);
-		List<OrderItem> items = orderItemService.findByOrderId(id);
-		Address address = addressService.getAddressDetailById(order.getAddress().getId());
-		model.addAttribute("address", address);
+		//List<OrderItem> items = orderItemService.findByOrderId(id);
+		//Address address = addressService.getAddressDetailById(order.getAddress().getId());
+		//model.addAttribute("address", address);
 		model.addAttribute("order", order);
-		model.addAttribute("items", items);
+		//model.addAttribute("items", items);
 		return "order-detail";
 	}
 	

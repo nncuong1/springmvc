@@ -3,6 +3,7 @@ package com.nnc.service;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -11,10 +12,14 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nnc.dao.AddressDao;
 import com.nnc.dao.OrderDao;
+import com.nnc.dao.OrderItemDao;
 import com.nnc.dao.UserDao;
 import com.nnc.dto.OrderForm;
+import com.nnc.entity.Address;
 import com.nnc.entity.Order;
+import com.nnc.entity.OrderItem;
 import com.nnc.entity.User;
 import com.nnc.util.DateUtil;
 import com.nnc.util.Paging;
@@ -25,6 +30,12 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderDao<Order> orderDao;
+	
+	@Autowired
+	private OrderItemDao<OrderItem> orderItemDao;
+	
+	@Autowired
+	private AddressDao<Address> addressDao;
 	
 	@Autowired
 	private UserDao<User> userDao;
@@ -91,7 +102,12 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order getOrderDetailById(int id) {
-		return orderDao.getOrderDetailById(id);
+		Order order = orderDao.getOrderDetailById(id);
+		List<OrderItem> items = orderItemDao.findByOrderId(id);
+		Address address = addressDao.getAddressDetailById(order.getAddress().getId());
+		order.setAddress(address);
+		order.setItems(new HashSet<OrderItem>(items));
+		return order;
 	}
 
 	@Override

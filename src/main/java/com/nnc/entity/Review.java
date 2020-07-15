@@ -33,6 +33,8 @@ public class Review implements Serializable{
 	@JoinColumn(name = "customer_id", nullable = false)
 	private User customer;
 	
+	private int status;	
+	
 	@Column(name="active_flag")
 	private int activeFlag;	
 
@@ -44,6 +46,14 @@ public class Review implements Serializable{
 
 	@Transient
 	private String commentDate;
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 	public Integer getId() {
 		return id;
