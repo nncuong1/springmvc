@@ -9,6 +9,7 @@ public class City {
 	private String Created;
 	private String Updated;
 	private String TotalDoanhNghiep;
+	private String code;
 	public String getType() {
 		return Type;
 	}
