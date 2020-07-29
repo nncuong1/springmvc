@@ -11,7 +11,7 @@ public interface AuthorService {
 	public void deleteAuthor(Author author) throws Exception;
 	public List<Author> findAuthor(String property, Object value);
 	public List<Author> findByBookId(int id);
-	public List<Author> getAllAuthor(String keyword, Paging paging );
+	public List<Author> getAllAuthor(Author author, Paging paging );
 	public Author findById(int id);
 	public List<Integer> getIdAuthorByBook(int id);
 	public List<String> getAuthorNamesByBookId(int id);

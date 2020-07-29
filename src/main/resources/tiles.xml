@@ -64,6 +64,14 @@
         <put-attribute name="body" value="/WEB-INF/views/order/order-detail.jsp" />
     </definition>   
     
+    <definition name="author-action" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/author/author-action.jsp" />
+    </definition>
+    
+    <definition name="author-list" extends="base">
+        <put-attribute name="body" value="/WEB-INF/views/author/author-list.jsp" />
+    </definition>
+    
         <!-- Default Web Template -->
     <definition name="web" template="/WEB-INF/views/web/web-base.jsp">
     	<put-attribute name="header" value="/WEB-INF/views/web/header.jsp" />

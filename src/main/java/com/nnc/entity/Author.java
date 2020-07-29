@@ -24,6 +24,8 @@ public class Author implements Serializable {
 	
 	private String name;
 	
+	private String code;
+	
 	@ManyToMany(mappedBy = "authors")
    // private List<Product> products = new ArrayList<>();
 	private Set<Product> products = new HashSet<Product>();
@@ -64,6 +66,40 @@ public class Author implements Serializable {
 		this.products = products;
 	}
 	
+	
+	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public int getActiveFlag() {
+		return activeFlag;
+	}
+
+	public void setActiveFlag(int activeFlag) {
+		this.activeFlag = activeFlag;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if ( this == o ) {

@@ -139,7 +139,6 @@
 		 })
 		 
 		 $("#btn-orderForm").click(function(e){
-			 alert("hello ");
 			if($("#orderForm").valid()){
 			    $("#orderForm").submit();
 			}
