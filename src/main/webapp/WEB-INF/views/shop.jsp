@@ -18,7 +18,7 @@
 								<div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
 									<div class="product__thumb">
 										<a class="first__img"
-											href="<c:url value="/product?productId=${product.id}"/>"><img style="max-height:340px; overflow:hidden"
+											href="<c:url value="/product?productId=${product.id}"/>"><img style="max-height:340px;overflow:hidden"
 											src="<c:url value="/files/product/${product.imgUrl} "/>"></a>
 									</div>
 									<div class="product__content content--center">

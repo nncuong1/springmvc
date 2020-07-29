@@ -88,19 +88,6 @@
 								<li class="price">${p.price}</li>
 								<li style="display: inline; text-decoration: underline">đ</li>
 							</ul>
-							<!--  
-							<div class="action">
-								<div class="actions_inner">
-									<ul class="add_to_links">
-										<li><a class="cart"
-											href="<c:url value="/add_to_cart?productId=${p.id}"/>"><i
-												class="bi bi-shopping-bag4"></i></a></li>
-									
-									</ul>
-								</div>
-							</div>
-							<div class="product__hover--content">Thêm vào giỏ hàng</div>
-							-->
 						</div>
 					</div>
 					</c:forEach>

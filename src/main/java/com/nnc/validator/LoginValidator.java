@@ -1,5 +1,7 @@
 package com.nnc.validator;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -26,16 +28,20 @@ public class LoginValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "msg.required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "msg.required");
 		if(!StringUtils.isEmpty(user.getUsername()) && !StringUtils.isEmpty(user.getPassword())) {
-			User u = userService.findByUserName(user.getUsername());
-			if(user!=null && u!=null && u.getRole().getId()!=3 ) {
-				if(!u.getPassword().equals(user.getPassword())) {
-					errors.rejectValue("password", "msg.wrong.password");
+			List<User> us = userService.findUserByProperty("username", user.getUsername());
+			//if(user!=null && u!=null && u.getRole().getId()!=3 ) {
+			if(user!=null && !us.isEmpty()) {
+				if(us.get(0).getRole().getId()!=3) {
+					if(!us.get(0).getPassword().equals(user.getPassword())) {
+						errors.rejectValue("password", "msg.wrong.password");
+					}
+				}else {
+					errors.rejectValue("username", "msg.wrong.username");
 				}
 			}else {
 				errors.rejectValue("username", "msg.wrong.username");
 			}
 		}
-		
 	}
 	
 	public void validateCustomer(Object target, Errors errors) {
@@ -43,9 +49,9 @@ public class LoginValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "msg.required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "msg.required");
 		if(!StringUtils.isEmpty(user.getUsername()) && !StringUtils.isEmpty(user.getPassword())) {
-			User u = userService.findByUserName(user.getUsername());
-			if(user!=null && u!=null) {
-				if(!u.getPassword().equals(user.getPassword())) {
+			List<User> u = userService.findUserByProperty("username", user.getUsername());
+			if(user!=null && !u.isEmpty()) {
+				if(!u.get(0).getPassword().equals(user.getPassword())) {
 					errors.rejectValue("password", "msg.wrong.password");
 				}
 			}else {

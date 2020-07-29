@@ -124,7 +124,7 @@ public class ProductServiceImpl implements ProductService {
 			mapParams.put("description", "%"+searchForm.getKeyword()+"%");
 			mapParams.put("name", "%"+searchForm.getKeyword()+"%");
 		}
-
+		queryStr.append("order by p.createDate desc");
 		//return productDao.findAll(queryStr.toString(), mapParams, paging);
 		return productDao.searchProductWithCriteria(queryStr.toString(), mapParams, paging);
 	}
@@ -138,7 +138,7 @@ public class ProductServiceImpl implements ProductService {
 			mapParams.put("description", "%"+keyword+"%");
 			mapParams.put("name", "%"+keyword+"%");
 		}
-
+		queryStr.append("order by p.createDate desc");
 		//return productDao.findAll(queryStr.toString(), mapParams, paging);
 		return productDao.searchProductWithCriteria(queryStr.toString(), mapParams, paging);
 	}
