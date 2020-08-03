@@ -10,8 +10,7 @@ import org.apache.log4j.Logger;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
-import org.apache.mahout.cf.taste.impl.similarity.LogLikelihoodSimilarity;
-import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
+import org.apache.mahout.cf.taste.impl.similarity.UncenteredCosineSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
@@ -33,7 +32,7 @@ public class RecommendServiceImpl implements RecommendService {
 	@Autowired
 	ReviewDao<Review> reviewDao;
 	
-	private static final Logger log = Logger.getLogger(ProductServiceImpl.class);
+	private static final Logger log = Logger.getLogger(RecommendServiceImpl.class);
 
 	@Override
 	public void updateCsvFile() {
@@ -69,32 +68,46 @@ public class RecommendServiceImpl implements RecommendService {
 		return reviewDao.getDataForCsvFile();
 	}
 
-	@Override
-	public List<Long> userBasedNeighbor(int userId) throws Exception {
-		List<Long> productIds = new ArrayList<Long>();
-
-		DataModel model = RecommendationModel.getInstance().getDataModel();
-		UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
-		UserNeighborhood neighborhood = new NearestNUserNeighborhood(3, similarity, model);
-		UserBasedRecommender recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
-		try {
-			List<RecommendedItem> recommendations = recommender.recommend(userId, 3);
-			for (RecommendedItem recommendation : recommendations) {
-				productIds.add(recommendation.getItemID());
-			}
-		} catch (Exception e) {
-			log.error("user-neighbor :  "+e);
-			return null;
-		}
-		
-		return productIds;
-	}
+//	@Override
+//	public List<Long> userBasedNeighbor(int userId) throws Exception {
+//		List<Long> productIds = new ArrayList<Long>();
+//		log.info("user id : "+userId);
+//		DataModel model = RecommendationModel.getInstance().getDataModel();
+	//UserSimilarity similarity = new PearsonCorrelationSimilarity(model);
+	//UserNeighborhood neighborhood = new ThresholdUserNeighborhood(0.1, similarity, model);
+//		UserSimilarity similarity = new UncenteredCosineSimilarity(model);
+//		UserNeighborhood neighborhood = new NearestNUserNeighborhood(3, similarity, model);
+//		long[] neighborhoodId = neighborhood.getUserNeighborhood(userId);
+//		log.info("neighborhood : "+neighborhoodId.length);
+//		for(int i=0;i<neighborhoodId.length;i++) {
+//			log.info("neighborhood id : "+neighborhoodId[i]);
+//		}
+//		UserBasedRecommender recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
+//		try {
+//			List<RecommendedItem> recommendations = recommender.recommend(userId, 3);
+//			if(recommendations !=null && !recommendations.isEmpty()) {
+//				log.info("reomendation size : "+recommendations.size());
+//				for (RecommendedItem recommendation : recommendations) {
+//					productIds.add(recommendation.getItemID());
+//				}
+//			}else {
+//				log.info("reomendation size : "+recommendations.isEmpty());
+//				log.info("reomendation size : "+recommendations.size());
+//			}
+//		} catch (Exception e) {
+//			log.error("user-neighbor :  "+e);
+//			return null;
+//		}
+//		return productIds;
+//	}
 
 	@Override
 	public List<Long> itemBasedRecommendation(int productId) throws Exception {
 		List<Long> productIds = new ArrayList<Long>();
 		DataModel model = RecommendationModel.getInstance().getDataModel();
-		ItemSimilarity sim = new LogLikelihoodSimilarity(model);
+		// caculate similarity by cosine 
+		ItemSimilarity sim = new UncenteredCosineSimilarity(model);
+		// create recommender and compute a prediction
 		GenericItemBasedRecommender recomender = new GenericItemBasedRecommender(model, sim);
 		try {
 			List<RecommendedItem> recommendations = recomender.mostSimilarItems(productId, 3);
@@ -108,6 +121,43 @@ public class RecommendServiceImpl implements RecommendService {
 			return null;
 		}
 		
+		return productIds;
+	}
+	@Override
+	public List<Long> userBasedNeighbor(int userId) throws Exception {
+		List<Long> productIds = new ArrayList<Long>();
+		log.info("user id : "+userId);
+		// create datamodel read data from file
+		DataModel model = RecommendationModel.getInstance().getDataModel();
+		// caculate similarity by cosine alogrithm
+		UserSimilarity similarity = new UncenteredCosineSimilarity(model);
+		// select k user that have the hightest similarity
+		UserNeighborhood neighborhood = new NearestNUserNeighborhood(2, similarity, model);	
+		
+		// log neighborhood information
+		long[] neighborhoodId = neighborhood.getUserNeighborhood(userId);
+		log.info("neighborhood : "+neighborhoodId.length);
+		for(int i=0;i<neighborhoodId.length;i++) {
+			log.info("neighborhood id : "+neighborhoodId[i]);
+		}
+		
+		// create recommender and compute a prediction
+		UserBasedRecommender recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
+		try {
+			List<RecommendedItem> recommendations = recommender.recommend(userId, 3);
+			if(recommendations !=null && !recommendations.isEmpty()) {
+				log.info("reomendation size : "+recommendations.size());
+				for (RecommendedItem recommendation : recommendations) {
+					productIds.add(recommendation.getItemID());
+				}
+			}else {
+				//log.info("reomendation size : "+recommendations.isEmpty());
+				log.info("reomendation size : "+recommendations.size());
+			}
+		} catch (Exception e) {
+			log.error("user-neighbor :  "+e);
+			return null;
+		}
 		return productIds;
 	}
 

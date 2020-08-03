@@ -30,4 +30,11 @@ public class AuthDaoImpl extends BaseDaoImpl<Authority> implements AuthDao<Autho
 		return null;
 	}
 
+	@Override
+	public List<Authority> getAuthByMenuId(int menuId) {
+		return sessionFactory.getCurrentSession().createQuery(
+                "from authority a where a.menu.id=:menuId",
+                Authority.class).setParameter("menuId", menuId).getResultList();
+	}
+
 }

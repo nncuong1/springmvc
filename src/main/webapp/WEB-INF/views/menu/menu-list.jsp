@@ -12,17 +12,6 @@
 			<h5 class="card-header">Menu List</h5>
 			<div class="card-body">
 				<div class=row>
-					<!--  
-					<div class="col-sm-12 col-md-6">
-						<a href="<c:url value="/admin/menu/permission"/>" class="btn btn-app"><i class="fas fa-plus"></i>Permission</a>
-					</div>
-					<div class="col-sm-12 col-md-6">
-						<label class="switch">
-						  <input type="checkbox" onclick='handleClick(this);'>
-						  <span class="slider round"></span>
-						</label>
-					</div>
-					-->
 					<div class="col-sm-12 col-md-6">
 					<form id="searchForm" method="GET" action="<c:url value="/admin/menu/list"/>">
 						<div class="table_form_search">
@@ -39,7 +28,7 @@
 						<tr>
 							<th rowspan="2" scope="col" style="border-right : 2px solid">STT</th>
 							<th rowspan="2" scope="col" style="border-right : 2px solid">Url</th>
-							<th rowspan="2" scope="col" style="border-right : 2px solid">Status</th>
+							<!-- <th rowspan="2" scope="col" style="border-right : 2px solid">Status</th>  -->
 							<th class="text-center" colspan="${roles.size()}" scope="col" style="border-right : 2px solid " >Role</th>
 						</tr>
 						<tr>
@@ -53,7 +42,7 @@
 							<tr>
 								<td scope="row">${pageInfor.offset+loop.index+1}</td>
 								<td>${menu.url}</td>
-								<td><a href="javascript:void(0);" style="text-decoration:none" onclick="confirmChange(${menu.id},${menu.activeFlag},this);">${menu.activeFlag}</a></td>
+								<!--<td><a href="javascript:void(0);" style="text-decoration:none" onclick="confirmChange(${menu.id},${menu.activeFlag},this);">${menu.activeFlag}</a></td>-->
 								<!-- 
 								<c:choose>
 									<c:when test="${menu.activeFlag==1 }">
@@ -64,7 +53,6 @@
 									</c:otherwise>
 								</c:choose>
 								-->
-								
 								<c:forEach items="${menu.mapAuth}" var="auth">
 								<td class="permission-${auth.value}">
 								<label class="switch">
@@ -169,15 +157,6 @@
 		var msg = flag==1 ? 'Do you want disable this menu ?' : 'Do you want enable this menu ?';
 		if(confirm(msg)){
 			window.location.href = '<c:url value="/admin/menu/change-status/"/>'+id;
-			//if(item.text==='Disable'){
-		//		$(item).removeClass("btn-danger");
-			//	$(item).addClass("btn-primary");
-			//	item.text = "Enable";
-		//	}else{
-			//	$(item).addClass("btn-danger");
-			//	$(item).removeClass("btn-primary");
-		//		item.text = "Disable";
-		//	}
 		}
 	}
 	

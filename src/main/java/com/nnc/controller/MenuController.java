@@ -79,12 +79,12 @@ public class MenuController {
 		return "redirect:/admin/menu/list";
 	}
 	
-	@GetMapping("/admin/menu/permission")
-	public String updatePermission(Model model) {
-		model.addAttribute("authForm", new AuthForm());
-		initSelecbox(model);
-		return "menu-permission";
-	}
+//	@GetMapping("/admin/menu/permission")
+//	public String updatePermission(Model model) {
+//		model.addAttribute("authForm", new AuthForm());
+//		initSelecbox(model);
+//		return "menu-permission";
+//	}
 	
 	@RequestMapping(path="/admin/paging/menu", produces="text/plain; charset=utf-8")
 	@ResponseBody
@@ -103,9 +103,9 @@ public class MenuController {
 			builder.append("<tr>");
 			builder.append("<td scope='row'>"+(paging.getOffset()+menuList.indexOf(menu)+1)+"</td>");
 			builder.append("<td>"+menu.getUrl()+"</td>");
-			builder.append("<td>");
-			builder.append("<a href='javascript:void(0);' style='text-decoration:none' onclick='confirmChange("+menu.getId()+","+menu.getActiveFlag()+")'>"+menu.getActiveFlag()+"</a>");
-			builder.append("</td>");
+	//		builder.append("<td>");
+	//		builder.append("<a href='javascript:void(0);' style='text-decoration:none' onclick='confirmChange("+menu.getId()+","+menu.getActiveFlag()+")'>"+menu.getActiveFlag()+"</a>");
+	//		builder.append("</td>");
 			for(Entry<Integer, Integer> entry:menu.getMapAuth().entrySet()) {
 				builder.append("<td class='permission-"+entry.getValue()+"'>");
 				builder.append("<label class='switch'>");
@@ -119,20 +119,20 @@ public class MenuController {
 		return builder.toString();
 	}
 	
-	private void initSelecbox(Model model) {
-		List<Role> roles = roleService.getAdminRoles();
-		List<Menu> menus = menuService.findWithoutNPlusOne(null, null);
-		Map<Integer, String> mapRole = new HashMap<>();
-		Map<Integer, String> mapMenu = new HashMap<>();
-		for(Role role :roles) {
-			mapRole.put(role.getId(), role.getRoleName());
-		}
-		for(Menu menu:menus) {
-			mapMenu.put(menu.getId(), menu.getUrl());
-		}
-		model.addAttribute("mapRole", mapRole);
-		model.addAttribute("mapMenu", mapMenu);
-	}
+//	private void initSelecbox(Model model) {
+//		List<Role> roles = roleService.getAdminRoles();
+//		List<Menu> menus = menuService.findWithoutNPlusOne(null, null);
+//		Map<Integer, String> mapRole = new HashMap<>();
+//		Map<Integer, String> mapMenu = new HashMap<>();
+//		for(Role role :roles) {
+//			mapRole.put(role.getId(), role.getRoleName());
+//		}
+//		for(Menu menu:menus) {
+//			mapMenu.put(menu.getId(), menu.getUrl());
+//		}
+//		model.addAttribute("mapRole", mapRole);
+//		model.addAttribute("mapMenu", mapMenu);
+//	}
 	
 	private void setMapAuth(List<Role> roles, List<Menu> menuList) {
 		Collections.sort(roles, (r1,r2)->r1.getId() - r2.getId());

@@ -115,16 +115,6 @@
 						</div>
 					</div>
 				</form:form>
-				<div class="item form-group">
-						<label for="password" class="col-md-3 col-sm-3 col-form-label text-center">Test multiselect <span class="required">*</span></label>
-						<div class="col-md-4 col-sm-4 multiRole">
-							 <select id= "multipleSelect" style="display:none" name="" multiple>
-							 	<c:forEach items="${mapRole}" var="entry">
-							 		<option value="${entry.key}">${entry.value}</option>
-							 	</c:forEach>
-							 </select>
-						</div>
-				</div>
 			</div>
 		</div>
 	</div>

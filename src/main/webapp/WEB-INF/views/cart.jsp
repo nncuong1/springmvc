@@ -145,9 +145,10 @@
 			 	$('span.product_qun').text(value);
 			 	if($('span.product_qun').text()==='0'){
 			 		console.log("het hang");
-			 		$('li a.preOrder').hide();
+			 		//$('li a.preOrder').hide();
 			 		$('ul li.shopcart span').removeClass('product_qun')
 			 		$('ul li.shopcart span').text('');
+			 		$('ul.cart__btn__list li:nth-child(2)').hide();
 			 	}
 			 	loadPrice();
 			 },

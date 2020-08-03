@@ -68,7 +68,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> implements ProductDao<P
 	@Override
 	public List<Object[]> getBestSellerProductId() {
 		String hql = "select oi.product.id, count(oi.product.id) as rak, o.createDate, sum(oi.quantity) as qty from OrderItem oi" + 
-				" join orders o on o.id = oi.order group by oi.product.id order by o.createDate desc, qty desc, rak desc";
+				" join orders o on o.id = oi.order and o.status=2 group by oi.product.id order by o.createDate desc, qty desc, rak desc";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setMaxResults(8);
 		List<Object[]> results = query.getResultList();

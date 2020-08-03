@@ -32,7 +32,7 @@
 											
 										</h4>
 										<ul class="prize d-flex">
-											<li>$ ${product.price}</li>
+											<li>${product.price}</li>
 										</ul>
 									</div>
 								</div>

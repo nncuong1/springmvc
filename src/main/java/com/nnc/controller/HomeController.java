@@ -31,7 +31,7 @@ public class HomeController {
 	
 	@RequestMapping("/shop")
 	public String shop(Model model, @ModelAttribute("search_mini_form") SearchWebForm searchForm,  @RequestParam(required = false) Integer page) {
-		Paging paging = new Paging(9);
+		Paging paging = new Paging(12);
 		if(page==null) {
 			paging.setIndexPage(1);
 		}else {

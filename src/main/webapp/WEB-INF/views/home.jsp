@@ -104,9 +104,10 @@
 							<div class="product__thumb">
 								<a class="first__img" href="<c:url value="/product?productId=${product.id}"/>"><img src="<c:url value="/files/product/${product.imgUrl}"/>" alt="product image"></a>
 								<a class="second__img animation1" href="<c:url value="/product?productId=${product.id}"/>"><img src="<c:url value="/files/product/${product.imgUrl}"/>" alt="product image"></a>
-								<div class="hot__box">
-									<span class="hot-label">BEST SALLER</span>
+								<!-- <div class="hot__box">
+									<span class="hot-label">SẢN PHẨM MỚI</span>
 								</div>
+								 -->
 							</div>
 							<div class="product__content content--center">
 								<h4><a href="<c:url value="/product?productId=${product.id}"/>">${product.title}</a></h4>

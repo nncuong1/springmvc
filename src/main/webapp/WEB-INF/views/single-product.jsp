@@ -126,7 +126,7 @@
 								<input type="hidden" name="customerId" id="customerId" value="${customer.id}"></input>
 							</c:if>
 							<div class="submite__btn">
-								<a href="#" id="sendComment">Post Comment</a>
+								<a href="#" id="sendComment">Gửi đánh giá</a>
 							</div>
 						</form>
 					</div>

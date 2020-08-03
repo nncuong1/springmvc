@@ -124,7 +124,7 @@ public class ProductServiceImpl implements ProductService {
 			mapParams.put("description", "%"+searchForm.getKeyword()+"%");
 			mapParams.put("name", "%"+searchForm.getKeyword()+"%");
 		}
-		queryStr.append("order by p.createDate desc");
+		queryStr.append(" order by p.createDate desc");
 		//return productDao.findAll(queryStr.toString(), mapParams, paging);
 		return productDao.searchProductWithCriteria(queryStr.toString(), mapParams, paging);
 	}
@@ -138,7 +138,7 @@ public class ProductServiceImpl implements ProductService {
 			mapParams.put("description", "%"+keyword+"%");
 			mapParams.put("name", "%"+keyword+"%");
 		}
-		queryStr.append("order by p.createDate desc");
+		queryStr.append(" order by p.createDate desc");
 		//return productDao.findAll(queryStr.toString(), mapParams, paging);
 		return productDao.searchProductWithCriteria(queryStr.toString(), mapParams, paging);
 	}
@@ -203,31 +203,42 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getRecommendedProducts(int productId, int categoryId) throws Exception {
 		List<Long> multId = recommendService.itemBasedRecommendation(productId);
 		List<Product> recommendedProducts = null;
-		if (multId != null && !multId.isEmpty() && multId.size() >=2) {
+		if (multId != null && !multId.isEmpty() && multId.size() >2) {
 			log.info("item-based product ");
 			recommendedProducts = productDao.getRecommendedProducts(multId);
-			for (Product p : recommendedProducts) {
-				log.info("recomendation id : " + p.getId() + ", name : " + p.getTitle());
-			}
+			logRecommendProducts(recommendedProducts);
 		} else {
 			log.info("related product ");
 			recommendedProducts = productDao.getRelatedProduct(productId,categoryId);
+			logRecommendProducts(recommendedProducts);
 		}
 		return recommendedProducts;
 	}
-
+		
 	@Override
 	public List<Product> getRecommendedProducts(Integer userId, int productId, int categoryId) throws Exception {
 		List<Long> multId = null;
 		List<Product> recommendedProduct = null;
 		if(userId!=null) {
 			multId = recommendService.userBasedNeighbor(userId);
-			if(multId.size()<2 && multId!=null && !multId.isEmpty()) {
-				log.info("user-based product ");
-				recommendedProduct = productDao.getRecommendedProducts(multId);
-			}else {
+			if(multId==null) {
 				recommendedProduct = getRecommendedProducts(productId,  categoryId);
+			}else {
+				if(multId.size()>2) {
+					log.info("user-based product ");
+					recommendedProduct = productDao.getRecommendedProducts(multId);
+					logRecommendProducts(recommendedProduct);
+				}else {
+					recommendedProduct = getRecommendedProducts(productId,  categoryId);
+				}
 			}
+//			if(multId.size()>=2 && multId!=null && !multId.isEmpty()) {
+//				log.info("user-based product ");
+//				recommendedProduct = productDao.getRecommendedProducts(multId);
+//				logRecommendProducts(recommendedProduct);
+//			}else {
+//				recommendedProduct = getRecommendedProducts(productId,  categoryId);
+//			}
 		}else {
 			recommendedProduct = getRecommendedProducts(productId,  categoryId);
 		}
@@ -247,6 +258,12 @@ public class ProductServiceImpl implements ProductService {
 			multiIds.add((Integer)row[0]);
 		}
 		return productDao.getBestSellerProduct(multiIds);
+	}
+	
+	private void logRecommendProducts(List<Product> products) {
+		for (Product p : products) {
+			log.info("recomendation id : " + p.getId() + ", name : " + p.getTitle());
+		}
 	}
 }
 

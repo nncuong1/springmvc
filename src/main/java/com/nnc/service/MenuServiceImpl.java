@@ -68,6 +68,7 @@ public class MenuServiceImpl implements MenuService {
 			queryStr.append(" where m.url like :url");
 			mapParams.put("url", "%"+keyword+"%");
 		}
+		queryStr.append(" order by m.parentId asc, m.id asc");
 		List<Menu> menuList = menuDao.findWithoutNPlusOne(paging, queryStr.toString(), mapParams);
 		return menuList;
 	}
@@ -85,6 +86,13 @@ public class MenuServiceImpl implements MenuService {
 			menu.setActiveFlag(menu.getActiveFlag() == 1 ? 0 : 1);
 			menu.setUpdateDate(new Timestamp(System.currentTimeMillis()));
 			menuDao.update(menu);
+//			List<Authority> auths = authDao.getAuthByMenuId(id);
+//			for(Authority auth : auths) {
+//				if(auth.getPermission()==1) {
+//					auth.setPermission(0);
+//					authDao.update(auth);
+//				}
+//			}
 		}
 	}
 
