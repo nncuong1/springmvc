@@ -3,9 +3,6 @@ package com.nnc.service;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.transaction.Transactional;
-
 import org.apache.log4j.Logger;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
@@ -19,6 +16,7 @@ import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nnc.dao.ReviewDao;
 import com.nnc.entity.Review;

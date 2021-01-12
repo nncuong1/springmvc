@@ -7,11 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.transaction.Transactional;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.nnc.dao.RoleDao;
@@ -88,7 +87,7 @@ public class UserServiceImpl implements UserService {
 	public User findById(Integer id) {
 		return userDao.findById(User.class, id);
 	}
-
+	
 	public List<User> getAllUsers(String keyword, Paging paging) {
 		StringBuilder queryStr = new StringBuilder();
 		Map<String, Object> mapParams = new HashMap<String, Object>();
@@ -99,7 +98,7 @@ public class UserServiceImpl implements UserService {
 		}
 		List<User> users = userDao.findAll(queryStr.toString(), mapParams, paging);
 		List<Role> roles = roleDao.getRolesForUsers();
-		log.info("Catching roles for user : "+roles);
+		//log.info("Catching roles for user : "+roles);
 		for(User u : users) {
 			u.getRole();
 			//log.info("user for role : "+u.getRole().getRoleName());

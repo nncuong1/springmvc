@@ -121,6 +121,7 @@ public class AuthorController {
 			}
 			model.addAttribute("authorForm", author);
 			model.addAttribute("viewOnly",false);
+			System.out.println("hello : "+result.getFieldError());
 			return "author-action";
 		}
 		if(author.getId()!=null && author.getId()!=0) {

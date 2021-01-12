@@ -11,6 +11,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -125,7 +126,7 @@ public class CategoryController {
 	}
 	
 	@PostMapping("/category/save")
-	public String saveCategory(Model model, @ModelAttribute("categoryForm") Category category,  BindingResult result, HttpSession session) {
+	public String saveCategory(Model model, @ModelAttribute("categoryForm") Category category,  BindingResult result , HttpSession session) {
 		categoryValidator.validate(category, result);
 		if(result.hasErrors()) {
 			if(category.getId()!=null) {
