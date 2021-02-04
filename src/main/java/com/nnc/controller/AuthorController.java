@@ -60,7 +60,7 @@ public class AuthorController {
 	 * ADMIN
 	 * */
 	@RequestMapping("/admin/author/list")
-	public String showauthorList(Model model, HttpSession session,@ModelAttribute("authorSearch") Author authorForm) {
+	public String showAuthorList(Model model, HttpSession session,@ModelAttribute("authorSearch") Author authorForm) {
 		Paging paging = new Paging(15);
 		paging.setIndexPage(1);
 		List<Author> authors = authorService.getAllAuthor(authorForm, paging);
@@ -78,7 +78,7 @@ public class AuthorController {
 	}
 	
 	@GetMapping("/admin/author/add")
-	public String addauthor(Model model) {
+	public String addAuthor(Model model) {
 		model.addAttribute("authorForm", new Author());
 		model.addAttribute("titlePage", "Add author");
 		model.addAttribute("viewOnly",false);
@@ -86,7 +86,7 @@ public class AuthorController {
 	}
 	
 	@GetMapping("/admin/author/edit/{id}")
-	public String editauthor(Model model, @PathVariable("id") int id) {
+	public String editAuthor(Model model, @PathVariable("id") int id) {
 		Author author = authorService.findById(id);
 		if(author!=null) {
 			model.addAttribute("titlePage", "Edit author");
@@ -97,7 +97,7 @@ public class AuthorController {
 		return "redirect:/admin/author/list";
 	}
 	@GetMapping("/admin/author/delete/{id}")
-	public String deleteauthor(Model model, @PathVariable("id") int id, HttpSession session) {
+	public String deleteAuthor(Model model, @PathVariable("id") int id, HttpSession session) {
 		Author author = authorService.findById(id);
 		if(author!=null) {
 			try {
@@ -111,7 +111,7 @@ public class AuthorController {
 		return "redirect:/admin/author/list";
 	}
 	@PostMapping("/admin/author/save")
-	public String saveauthor(Model model, @ModelAttribute("authorForm") Author author,  BindingResult result, HttpSession session) {
+	public String saveAuthor(Model model, @ModelAttribute("authorForm") Author author,  BindingResult result, HttpSession session) {
 		authorValidator.validate(author, result);
 		if(result.hasErrors()) {
 			if(author.getId()!=null) {

@@ -21,7 +21,6 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao<User> {
 	}
 	
 	public List<User> getCustomerForReviews() {
-		//select distinct r from user u join role r on u.role = r.id
 		List<User> users =sessionFactory.getCurrentSession().
 				createQuery("select distinct u from review r join user u on r.customer = u.id",User.class).getResultList();	
 		return users;

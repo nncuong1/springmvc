@@ -215,7 +215,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/admin/product/delete/{id}")
-	public String deleteproduct(Model model, @PathVariable("id") int id, HttpSession session) {
+	public String deleteProduct(Model model, @PathVariable("id") int id, HttpSession session) {
 		Product product = productService.findById(id);
 		if (product != null) {
 			try {
@@ -231,7 +231,7 @@ public class ProductController {
 
 	@RequestMapping(path = "/admin/paging/product", produces = "text/plain; charset=utf-8")
 	@ResponseBody
-	public String showproducts(Model model, HttpSession session,
+	public String showProducts(Model model, HttpSession session,
 			@RequestParam(name = "keyword", required = false) String keyword,
 			@RequestParam(required = false) int page) {
 		Paging paging = new Paging(10);
