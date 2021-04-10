@@ -2,6 +2,8 @@ package com.nnc.service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,9 +53,11 @@ public class MenuServiceImpl implements MenuService {
 			}
 			menu.setChild(childList);
 		}
-		menuList.sort((Menu m1, Menu m2) -> m1.getOrderIndex() - m2.getOrderIndex());
+		//menuList.sort((Menu m1, Menu m2) -> m1.getOrderIndex() - m2.getOrderIndex());
+		sortMenu(menuList);
 		for (Menu menu : menuList) {
-			menu.getChild().sort((Menu m1, Menu m2) -> m1.getOrderIndex() - m2.getOrderIndex());
+			//menu.getChild().sort((Menu m1, Menu m2) -> m1.getOrderIndex() - m2.getOrderIndex());
+			sortMenu(menu.getChild());
 		}
 		return menuList;
 	}
@@ -93,6 +97,15 @@ public class MenuServiceImpl implements MenuService {
 //			}
 		}
 	}
+	
+	public void sortMenu(List<Menu> menus) {
+		Collections.sort(menus,new Comparator<Menu>() {
+			public int compare(Menu o1, Menu o2) {
+				return o1.getOrderIndex()-o2.getOrderIndex();
+			}
+		});
+	}
+
 
 	@Override
 	public void updatePermission(int permission, int menuId, int roleId) {
